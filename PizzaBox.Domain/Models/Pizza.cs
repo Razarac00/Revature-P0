@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Pizza
+    public class Pizza : ISellable
     {
+        public double Price { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public int GetPizzaSize()
         {
             throw new NotImplementedException();
