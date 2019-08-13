@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using PizzaBox.Domain.Models;
+using System.Collections.Generic;
 
 namespace PizzaBox.Testing.UnitTests
 {
@@ -45,7 +46,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var pizza = new Pizza();
         //When
-        var expected = null;
+        List<Topping> expected = null;
         var actual = pizza.GetPizzaToppings();
 
         //Then
@@ -70,7 +71,7 @@ namespace PizzaBox.Testing.UnitTests
 
         //Then
         Assert.NotNull(actual);
-        Assert.isType<ArgumentOutOfRangeException>(actual);
+        Assert.IsType<ArgumentOutOfRangeException>(actual);
         }
 
         [Fact]
@@ -79,7 +80,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var pizza = new Pizza();
         //When
-        var expected = "Traditional Pan";
+        var expected = new Crust();
         var actual = pizza.getPizzaCrust();
 
         //Then
