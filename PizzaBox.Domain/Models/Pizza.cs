@@ -6,6 +6,10 @@ namespace PizzaBox.Domain.Models
 {
     public class Pizza : ISellable
     {
+        public List<Topping> PizzaToppings { get; private set; }
+
+        public Crust PizzaCrust { get; set; }
+
         public double Price { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -14,9 +18,18 @@ namespace PizzaBox.Domain.Models
             throw new NotImplementedException();
         }
 
-        public double GetPizzaCost()
+        private double ComputePizzaPrice()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            double total = 0.0;
+            foreach (var toppin in PizzaToppings)
+            {
+                total += toppin.Price;
+            }
+
+            total += PizzaCrust.Price;
+
+            return total;
         }
 
         public List<Topping> GetPizzaToppings()

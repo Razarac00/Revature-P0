@@ -34,7 +34,7 @@ namespace PizzaBox.Testing.UnitTests
         
         //When
         var expected = 9.99;
-        var actual = pizza.GetPizzaCost();
+        var actual = pizza.Price;
         
         //Then
         Assert.True(expected == actual);
