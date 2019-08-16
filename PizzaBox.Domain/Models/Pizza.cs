@@ -7,8 +7,8 @@ namespace PizzaBox.Domain.Models
     public class Pizza : ISellable
     {
         public List<Topping> PizzaToppings { get; set; }
-
         public Crust PizzaCrust { get; set; }
+        public Size PizzaSize { get; set; }
 
         public decimal Price { get; set; }
         public string Name { get; set; }

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using PizzaBox.Domain.Interfaces;
+using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Size : ISellable
+    public class Size : AItem
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
     }
 }
