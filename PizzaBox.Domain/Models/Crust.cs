@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PizzaBox.Domain.Interfaces;
 
@@ -5,6 +6,8 @@ namespace PizzaBox.Domain.Models
 {
     public class Crust : ISellable, ISizeable
     {
+        private string _defaultSize = "Medium";
+        private double _defaultPrice = 2.00;
         private Dictionary<string, double> _sizingandpricing = new Dictionary<string, double>() 
         {
             {"Small", 1.00},
@@ -38,15 +41,53 @@ namespace PizzaBox.Domain.Models
             return _sizingandpricing;
         }
 
+        private double ComputeCurrentPrice(double value)
+        {
+            return _sizingandpricing[CurrentSize] + Price;
+        }
+
+        private string SetupCurrentSize(string value)
+        {
+            string result = _defaultSize;
+            if (_sizingandpricing.ContainsKey(value))
+            {
+                result = value;
+            }
+            return result;
+        }
+
+        private double SetupPrice(double value)
+        {
+            double result = _defaultPrice;
+            if (value > 0)
+            {
+                result = value;
+            }
+            return result;
+        }
+
+        private string SetupName(string value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("Crust must have a name");
+            }
+            else
+            {
+                return value;
+            }
+            
+        }
+
         public double Price 
         { 
-            get => Price; 
-            set => Price = value; 
+            get => _defaultPrice; 
+            set => _defaultPrice = SetupPrice(value); 
         }
         public string Name 
         { 
             get => Name; 
-            set => Name = value;
+            set => Name = SetupName(value);
         }
         public Dictionary<string, double> SizingAndPricing 
         { 
@@ -56,7 +97,20 @@ namespace PizzaBox.Domain.Models
         public string CurrentSize 
         { 
             get => CurrentSize; 
-            set => CurrentSize = value; 
+            set => CurrentSize = SetupCurrentSize(value); 
+        }
+
+        public double CurrentPrice
+        {
+            get => CurrentPrice;
+            private set => CurrentPrice = value;
+        }
+
+        public Crust(string name)
+        {
+            Name = name;
+            CurrentSize = _defaultSize;
+            Price = _defaultPrice;
         }
 
     }
