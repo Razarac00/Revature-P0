@@ -4,25 +4,25 @@ using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Crust : ISellable, ISizeable
+    public class Crust : ISellable
     {
         private string _defaultSize = "Medium";
-        private double _defaultPrice = 2.00;
+        private decimal _defaultPrice = 2.00m;
         private string _defaultName = "Traditional";
-        private Dictionary<string, double> _sizingandpricing = new Dictionary<string, double>() 
+        private Dictionary<string, decimal> _sizingandpricing = new Dictionary<string, decimal>() 
         {
-            {"Small", 1.00},
-            {"Medium", 1.50},
-            {"Large", 2.00},
-            {"XLarge", 2.50}
+            {"Small", 1.00m},
+            {"Medium", 1.50m},
+            {"Large", 2.00m},
+            {"XLarge", 2.50m}
         };
 
-        private Dictionary<string, double> CleanupSAndP(Dictionary<string, double> ProposedSAndP)
+        private Dictionary<string, decimal> CleanupSAndP(Dictionary<string, decimal> ProposedSAndP)
         {
 
             foreach ( string sizeName in ProposedSAndP.Keys)
             {
-                if (ProposedSAndP[sizeName] < 0.0)
+                if (ProposedSAndP[sizeName] < 0.0m)
                 {
                     // considering throwing an invalidpricingexception if price is negative
                     ProposedSAndP.Remove(sizeName);
@@ -32,7 +32,7 @@ namespace PizzaBox.Domain.Models
             return ProposedSAndP;
         }
 
-        private Dictionary<string, double> SetupSAndP(Dictionary<string, double> ProposedSAndP)
+        private Dictionary<string, decimal> SetupSAndP(Dictionary<string, decimal> ProposedSAndP)
         {
             if (ProposedSAndP != null)
             {
@@ -42,7 +42,7 @@ namespace PizzaBox.Domain.Models
             return _sizingandpricing;
         }
 
-        private double ComputeCurrentPrice(double value)
+        private decimal ComputeCurrentPrice( decimal value)
         {
             return _sizingandpricing[CurrentSize] + Price;
         }
@@ -57,9 +57,9 @@ namespace PizzaBox.Domain.Models
             return result;
         }
 
-        private double SetupPrice(double value)
+        private decimal SetupPrice( decimal value)
         {
-            double result = _defaultPrice;
+         decimal result = _defaultPrice;
             if (value > 0)
             {
                 result = value;
@@ -78,7 +78,7 @@ namespace PizzaBox.Domain.Models
             
         }
 
-        public double Price 
+        public decimal Price 
         { 
             get => _defaultPrice; 
             set => _defaultPrice = SetupPrice(value); 
@@ -88,7 +88,7 @@ namespace PizzaBox.Domain.Models
             get => Name; 
             set => Name = SetupName(value);
         }
-        public Dictionary<string, double> SizingAndPricing 
+        public Dictionary<string, decimal> SizingAndPricing 
         { 
             get => _sizingandpricing; 
             set => _sizingandpricing = SetupSAndP(value); 
@@ -99,7 +99,7 @@ namespace PizzaBox.Domain.Models
             set => CurrentSize = SetupCurrentSize(value); 
         }
 
-        public double CurrentPrice
+        public decimal CurrentPrice
         {
             get => CurrentPrice;
             private set => CurrentPrice = value;
@@ -108,15 +108,10 @@ namespace PizzaBox.Domain.Models
         public Crust(string name)
         {
             Name = name;
-            CurrentSize = _defaultSize;
-            Price = _defaultPrice;
         }
 
         public Crust()
         {
-            Name = _defaultName;
-            CurrentSize = _defaultSize;
-            Price = _defaultPrice;
         }
 
     }

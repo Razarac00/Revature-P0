@@ -10,7 +10,7 @@ namespace PizzaBox.Domain.Models
 
         public Crust PizzaCrust { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string Name { get; set; }
 
         public int GetPizzaSize()
@@ -18,10 +18,10 @@ namespace PizzaBox.Domain.Models
             throw new NotImplementedException();
         }
 
-        private double ComputePizzaPrice()
+        private decimal ComputePizzaPrice()
         {
             //throw new NotImplementedException();
-            double total = 0.0;
+            decimal total = 0.0m;
             foreach (var toppin in PizzaToppings)
             {
                 total += toppin.Price;

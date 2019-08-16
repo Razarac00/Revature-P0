@@ -4,7 +4,7 @@ namespace PizzaBox.Domain.Interfaces
 {
     public interface ISizeable
     {
-        Dictionary<string, double> SizingAndPricing { get; set; }
+        Dictionary<string, decimal> SizingAndPricing { get; set; }
 
         string CurrentSize { get; set; }
 

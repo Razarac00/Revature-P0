@@ -4,8 +4,8 @@ namespace PizzaBox.Domain.Models
 {
     public class Topping : ISellable
     {
-        private double _defaultPrice = 0.50;
-        public double Price 
+        private decimal _defaultPrice = 0.50m;
+        public decimal Price 
         { 
             get 
             {
@@ -24,7 +24,7 @@ namespace PizzaBox.Domain.Models
             Name = name;
         }
 
-        public Topping(string name, double price)
+        public Topping(string name, decimal price)
         {
             Name = name;
             Price = price;

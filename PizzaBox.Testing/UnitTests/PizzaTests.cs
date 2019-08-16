@@ -33,7 +33,7 @@ namespace PizzaBox.Testing.UnitTests
         var pizza = new Pizza();
         
         //When
-        var expected = 9.99;
+        var expected = 9.99m;
         var actual = pizza.Price;
         
         //Then
