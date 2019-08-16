@@ -17,7 +17,7 @@ namespace PizzaBox.Testing.UnitTests
         public void CanViewOrders()
         {
         //Given
-        
+        var store = new Store();
         //When
         
         //Then

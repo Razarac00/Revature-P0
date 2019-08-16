@@ -4,13 +4,40 @@ namespace PizzaBox.Domain.Models
 {
     public class Topping : ISellable
     {
-        public double Price { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Name { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        private string v;
+        private double _defaultPrice = 0.50;
+        public double Price 
+        { 
+            get 
+            {
+                return this._defaultPrice;
+            } 
+            set
+            {
+                this._defaultPrice = value; 
+            }
+        }
+        public string Name 
+        { 
+            get 
+            {
+                return Name;
+            } 
+            set
+            { 
+                Name = value;
+            } 
+        }
 
-        public Topping(string v)
+        public Topping(string name)
         {
-            this.v = v;
+            Name = name;
+            Price = _defaultPrice;
+        }
+
+        public Topping(string name, double price)
+        {
+            Name = name;
+            Price = price;
         }
 
     }

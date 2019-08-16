@@ -28,6 +28,8 @@ namespace PizzaBox.Testing.UnitTests
         [Fact]
         public void CheckCostLimit()
         {
+            var order1 = new Order();
+            var goldjalapenos = new Topping("goldjalapenos");
 
         }
 
@@ -35,6 +37,12 @@ namespace PizzaBox.Testing.UnitTests
         public void CheckPizzaCount()
         {
             
+        }
+
+        [Fact]
+        public void CanCompleteAnOrder()
+        {
+            var order1 = new Order();
         }
     }
 }
