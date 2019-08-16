@@ -79,8 +79,9 @@ namespace PizzaBox.Testing.UnitTests
         {
         //Given
         var pizza = new Pizza();
+        var CrustName = "Traditional";
         //When
-        var expected = new Crust();
+        var expected = new Crust(CrustName);
         var actual = pizza.getPizzaCrust();
 
         //Then

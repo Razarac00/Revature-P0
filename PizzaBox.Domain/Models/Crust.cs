@@ -8,6 +8,7 @@ namespace PizzaBox.Domain.Models
     {
         private string _defaultSize = "Medium";
         private double _defaultPrice = 2.00;
+        private string _defaultName = "Traditional";
         private Dictionary<string, double> _sizingandpricing = new Dictionary<string, double>() 
         {
             {"Small", 1.00},
@@ -68,14 +69,12 @@ namespace PizzaBox.Domain.Models
 
         private string SetupName(string value)
         {
-            if (String.IsNullOrEmpty(value))
+            string result = _defaultName;
+            if (!String.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Crust must have a name");
+                result = value;
             }
-            else
-            {
-                return value;
-            }
+            return result;
             
         }
 
@@ -109,6 +108,13 @@ namespace PizzaBox.Domain.Models
         public Crust(string name)
         {
             Name = name;
+            CurrentSize = _defaultSize;
+            Price = _defaultPrice;
+        }
+
+        public Crust()
+        {
+            Name = _defaultName;
             CurrentSize = _defaultSize;
             Price = _defaultPrice;
         }
