@@ -4,8 +4,8 @@ namespace PizzaBox.Domain.Models
 {
     public class Store : ILocation
     {
-        public string Address { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string Street { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public string City { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public Inventory Inventory { get; set; }
+        public Inventory Inventory { get; set; } // dictionary<item, int>
     }
 }

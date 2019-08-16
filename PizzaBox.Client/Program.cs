@@ -15,7 +15,7 @@ namespace PizzaBox.Client
         private static void MessWithToppings()
         {
             Topping hab = new Topping("habanero");
-            System.Console.WriteLine(hab.Price);
+            System.Console.WriteLine(hab.Price + " " + hab.Name);
         }
     }
 }

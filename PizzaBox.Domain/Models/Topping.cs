@@ -16,22 +16,12 @@ namespace PizzaBox.Domain.Models
                 this._defaultPrice = value; 
             }
         }
-        public string Name 
-        { 
-            get 
-            {
-                return Name;
-            } 
-            set
-            { 
-                Name = value;
-            } 
-        }
+
+        public string Name {get; set;}
 
         public Topping(string name)
         {
             Name = name;
-            Price = _defaultPrice;
         }
 
         public Topping(string name, double price)

@@ -6,12 +6,12 @@ namespace PizzaBox.Domain.Models
 {
     public class Pizza : ISellable
     {
-        public List<Topping> PizzaToppings { get; private set; }
+        public List<Topping> PizzaToppings { get; set; }
 
         public Crust PizzaCrust { get; set; }
 
-        public double Price { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Price { get; set; }
+        public string Name { get; set; }
 
         public int GetPizzaSize()
         {
