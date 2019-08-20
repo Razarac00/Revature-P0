@@ -6,5 +6,6 @@ namespace PizzaBox.Domain.Models
 {
     public class Size : AItem
     {
+        public Size(string name) : base(name) {}
     }
 }

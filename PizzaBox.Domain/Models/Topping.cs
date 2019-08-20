@@ -1,11 +1,12 @@
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Topping : ISellable
+    public class Topping : AItem, ISellable
     {
         private decimal _defaultPrice = 0.50m;
-        public decimal Price 
+        public new decimal Price 
         { 
             get 
             {
@@ -17,14 +18,12 @@ namespace PizzaBox.Domain.Models
             }
         }
 
-        public string Name {get; set;}
-
-        public Topping(string name)
+        public Topping(string name) : base(name)
         {
             Name = name;
         }
 
-        public Topping(string name, decimal price)
+        public Topping(string name, decimal price) : base(name)
         {
             Name = name;
             Price = price;

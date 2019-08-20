@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Crust : ISellable
+    public class Crust : AItem, ISellable
     {
         private string _defaultSize = "Medium";
         private decimal _defaultPrice = 2.00m;
@@ -57,37 +58,6 @@ namespace PizzaBox.Domain.Models
             return result;
         }
 
-        private decimal SetupPrice( decimal value)
-        {
-         decimal result = _defaultPrice;
-            if (value > 0)
-            {
-                result = value;
-            }
-            return result;
-        }
-
-        private string SetupName(string value)
-        {
-            string result = _defaultName;
-            if (!String.IsNullOrEmpty(value))
-            {
-                result = value;
-            }
-            return result;
-            
-        }
-
-        public decimal Price 
-        { 
-            get => _defaultPrice; 
-            set => _defaultPrice = SetupPrice(value); 
-        }
-        public string Name 
-        { 
-            get => Name; 
-            set => Name = SetupName(value);
-        }
         public Dictionary<string, decimal> SizingAndPricing 
         { 
             get => _sizingandpricing; 
@@ -105,12 +75,7 @@ namespace PizzaBox.Domain.Models
             private set => CurrentPrice = value;
         }
 
-        public Crust(string name)
-        {
-            Name = name;
-        }
-
-        public Crust()
+        public Crust(string name) : base(name)
         {
         }
 

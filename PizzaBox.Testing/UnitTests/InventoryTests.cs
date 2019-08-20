@@ -20,7 +20,7 @@ namespace PizzaBox.Testing.UnitTests
         {
         //Given
         var storage = new Inventory();
-        var crust = new Crust();
+        var crust = new Crust("traditional");
         //When
         var expected = true;
         storage.AddItem(crust);
@@ -34,7 +34,7 @@ namespace PizzaBox.Testing.UnitTests
         {
         //Given
         var storage = new Inventory();
-        var crust = new Crust();
+        var crust = new Crust("traditional");
         //When
         var expected = true;
         storage.RemoveItem(crust);
@@ -49,7 +49,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var storage = new Inventory();
         //When
-        var crust = new Crust();
+        var crust = new Crust("traditional");
         var jalapenos = new Topping("Jalapenos");
         
         storage.AddItem(crust);
