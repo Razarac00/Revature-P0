@@ -21,13 +21,14 @@ namespace PizzaBox.Domain.Models
         private decimal ComputePizzaPrice()
         {
             //throw new NotImplementedException();
-            decimal total = 0.0m;
+            decimal total = 0m;
             foreach (var toppin in PizzaToppings)
             {
                 total += toppin.Price;
             }
 
             total += PizzaCrust.Price;
+            total += PizzaSize.Price;
 
             return total;
         }

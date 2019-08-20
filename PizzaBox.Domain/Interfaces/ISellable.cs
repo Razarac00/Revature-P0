@@ -5,5 +5,7 @@ namespace PizzaBox.Domain.Interfaces
         decimal Price { get; set; }
 
         string Name { get; set; }
+
+        string ToString();
     }
 }

@@ -7,7 +7,7 @@ namespace PizzaBox.Domain.Models
     {
         public Name UserName { get; set; }
 
-        public OrderHistory UserOrders { get; set; }
+        public List<Order> UserOrderHistory { get; set; }
 
         public ILocation LatestStore { get; set; }
 

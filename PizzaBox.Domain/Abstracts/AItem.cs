@@ -50,5 +50,10 @@ namespace PizzaBox.Domain.Abstracts
             Name = name;
             Price = price;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}: ${Price}";
+        }
     }
 }
