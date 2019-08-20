@@ -1,8 +1,9 @@
 using System;
+using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Abstracts
 {
-    public abstract class AItem
+    public abstract class AItem : ISellable
     {
         private string _defaultName = "Item Name";
         private decimal _defaultPrice = 1.00m;

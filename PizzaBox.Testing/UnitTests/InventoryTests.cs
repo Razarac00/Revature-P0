@@ -19,12 +19,12 @@ namespace PizzaBox.Testing.UnitTests
         public void AddToInventoryTest()
         {
         //Given
-        var storage = new Inventory();
+        var storage = Inventory.Instance();
         var crust = new Crust("traditional");
         //When
         var expected = true;
-        storage.AddItem(crust);
-        var actual = storage.HasItem(crust.Name);
+        storage.Add(crust, 100);
+        var actual = storage.ContainsKey(crust);
         //Then
         Assert.True(expected == actual);
         }
@@ -33,12 +33,13 @@ namespace PizzaBox.Testing.UnitTests
         public void RemoveFromInventoryTest()
         {
         //Given
-        var storage = new Inventory();
+        var storage = Inventory.Instance();
         var crust = new Crust("traditional");
         //When
         var expected = true;
-        storage.RemoveItem(crust);
-        var actual = storage.HasItem(crust.Name);
+        storage.Add(crust, 100);
+        storage.Remove(crust);
+        var actual = storage.ContainsKey(crust);
         //Then
         Assert.True(expected != actual);
         }
@@ -47,16 +48,16 @@ namespace PizzaBox.Testing.UnitTests
         public void ViewInventoryTest()
         {
         //Given
-        var storage = new Inventory();
+        var storage = Inventory.Instance();
         //When
         var crust = new Crust("traditional");
         var jalapenos = new Topping("Jalapenos");
         
-        storage.AddItem(crust);
-        storage.AddItem(jalapenos);
+        storage.Add(crust, 50);
+        storage.Add(jalapenos, 100);
 
         var expected = new List<ISellable> {crust, jalapenos};
-        var actual = storage.ViewItems();
+        var actual = storage.Keys.ToList();
 
         var firstNotSecond = expected.Except(actual).ToList();
         var secondNotFirst = actual.Except(expected).ToList();
