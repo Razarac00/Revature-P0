@@ -25,6 +25,7 @@ namespace PizzaBox.Testing.UnitTests
         var expected = true;
         storage.Add(crust, 100);
         var actual = storage.ContainsKey(crust);
+        storage.Remove(crust);
         //Then
         Assert.True(expected == actual);
         }
@@ -61,6 +62,7 @@ namespace PizzaBox.Testing.UnitTests
 
         var firstNotSecond = expected.Except(actual).ToList();
         var secondNotFirst = actual.Except(expected).ToList();
+
         //Then
         Assert.True(!firstNotSecond.Any() && !secondNotFirst.Any());
 
