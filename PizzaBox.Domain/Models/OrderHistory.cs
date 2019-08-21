@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace PizzaBox.Domain.Models
 {
-    public class OrderHistory
+    public class OrderHistory // OrderHistories as a singleton instead?
     {
         private static List<Order> _orders;
 

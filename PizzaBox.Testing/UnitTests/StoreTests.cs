@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace PizzaBox.Testing.UnitTests
 {
@@ -34,15 +35,15 @@ namespace PizzaBox.Testing.UnitTests
         }
 
         [Fact]
-        public void CanViewInventory()
+        public void InventoryIsDictionary()
         {
         //Given
         var store = new Store();
         //When
-        Inventory actual = store.Inventory;
+        Dictionary<ISellable, int> actual = store.Inventory;
         
         //Then
-        Assert.IsType<Inventory>(actual);
+        Assert.IsType<Dictionary<ISellable, int>>(actual);
         }
 
         [Fact]

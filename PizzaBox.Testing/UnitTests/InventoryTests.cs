@@ -19,13 +19,13 @@ namespace PizzaBox.Testing.UnitTests
         public void AddToInventoryTest()
         {
         //Given
-        var storage = Inventory.Instance();
+        var storage = new Inventory();
         var crust = new Crust("traditional");
         //When
         var expected = true;
-        storage.Add(crust, 100);
-        var actual = storage.ContainsKey(crust);
-        storage.Remove(crust);
+        storage.Items.Add(crust, 100);
+        var actual = storage.Items.ContainsKey(crust);
+        storage.Items.Remove(crust);
         //Then
         Assert.True(expected == actual);
         }
@@ -34,7 +34,7 @@ namespace PizzaBox.Testing.UnitTests
         public void RemoveFromInventoryTest()
         {
         //Given
-        var storage = Inventory.Instance();
+        var storage = new Inventory().Items;
         var crust = new Crust("traditional");
         //When
         var expected = true;
@@ -49,7 +49,7 @@ namespace PizzaBox.Testing.UnitTests
         public void ViewInventoryTest()
         {
         //Given
-        var storage = Inventory.Instance();
+        var storage = new Inventory().Items;
         //When
         var crust = new Crust("traditional");
         var jalapenos = new Topping("Jalapenos");

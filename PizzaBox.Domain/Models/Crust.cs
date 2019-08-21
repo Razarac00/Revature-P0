@@ -8,8 +8,8 @@ namespace PizzaBox.Domain.Models
     public class Crust : AItem, ISellable
     {
         private string _defaultSize = "Medium";
-        private decimal _defaultPrice = 2.00m;
-        private string _defaultName = "Traditional";
+        // private decimal _defaultPrice = 2.00m;
+        // private string _defaultName = "Traditional";
         private Dictionary<string, decimal> _sizingandpricing = new Dictionary<string, decimal>() 
         {
             {"Small", 1.00m},
