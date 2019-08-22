@@ -7,26 +7,27 @@ namespace PizzaBox.Domain.Models
 {
     public class Pizza : APizza
     {
-        private List<Topping> _toppings;
-
-        public List<Topping> GetPizzaToppings()
-        {
-            throw new NotImplementedException();
-        }
+        private int _defaultMaxToppings = 5;
 
         public void AddTopping(List<Topping> toppingList)
         {
-            // _toppings
+            if (CheckToppings(toppingList))
+            {
+                Toppings.AddRange(toppingList);
+            }
         }
 
-        public Action AddTopping(Topping topping)
+        private bool CheckToppings(List<Topping> potentialToppings)
         {
-            throw new NotImplementedException();
+            var temp = new List<Topping>();
+            temp.AddRange(Toppings);
+            temp.AddRange(potentialToppings);
+            return temp.Count <= _defaultMaxToppings;
         }
 
-        public Crust getPizzaCrust()
+        public void AddTopping(Topping topping)
         {
-            throw new NotImplementedException();
+            AddTopping(new List<Topping> {topping});
         }
     }
 }

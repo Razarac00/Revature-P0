@@ -20,8 +20,8 @@ namespace PizzaBox.Testing.UnitTests
         {
             var pizza = new Pizza();
 
-            var expected = 12;
-            var actual = pizza.GetPizzaSize();
+            var expected = new Size("medium");
+            var actual = pizza.Size;
 
             Assert.True(expected == actual);
         }
@@ -47,7 +47,7 @@ namespace PizzaBox.Testing.UnitTests
         var pizza = new Pizza();
         //When
         List<Topping> expected = null;
-        var actual = pizza.GetPizzaToppings();
+        var actual = pizza.Toppings;
 
         //Then
         Assert.False(expected == actual);
@@ -63,15 +63,19 @@ namespace PizzaBox.Testing.UnitTests
         {
             new Topping("Jalapenos"),
             new Topping("Green Peppers"),
-            new Topping("Red Peppers")
+            new Topping("Red Peppers"),
+            new Topping("Mushrooms"),
+            new Topping("Cheese")
         };
 
         pizza.AddTopping(toppingList);
-        var actual = Record.Exception(pizza.AddTopping(new Topping("Pineapple")));
+        pizza.AddTopping(new Topping("Pineapple"));
+        var actual = pizza.Toppings.Count;
+        var expected = 5;
 
         //Then
         Assert.NotNull(actual);
-        Assert.IsType<ArgumentOutOfRangeException>(actual);
+        Assert.True(actual == expected);
         }
 
         [Fact]
@@ -82,7 +86,7 @@ namespace PizzaBox.Testing.UnitTests
         var CrustName = "Traditional";
         //When
         var expected = new Crust(CrustName);
-        var actual = pizza.getPizzaCrust();
+        var actual = pizza.Crust;
 
         //Then
         Assert.True(expected == actual);
