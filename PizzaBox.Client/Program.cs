@@ -114,7 +114,7 @@ namespace PizzaBox.Client
         public void MakeNewYork()
         {
             var ny = new NewYork();
-            ny.Make(new Size("small"), new List<Topping>());
+            ny.Make();
         } 
     }
 }

@@ -15,26 +15,47 @@ namespace PizzaBox.Domain.Models
             return _users;
         }
 
-        public static void CreateUser(string uName, string fName, string lName)
+        public static User CreateUser(string uName, string fName, string lName, string password)
         {
+            if (ContainsUserName(uName) == null)
+            {
+                var user = new User();
+                user.UserName = uName;
+                user.Name.First = fName;
+                user.Name.Last = lName;
+                user.Password = password;
+                _users.Add(user);
 
+                return LoginUser(user.UserName, user.Password);
+            }
+            return null;
         }
 
-        public static void LoginUser(string uName)
+        public static User LoginUser(string uName, string password)
         {
-
+            var potentialUser = ContainsUserName(uName);
+            if (potentialUser != null && PasswordCheck(potentialUser, password))
+            {
+                return potentialUser;
+            }
+            return null;
         }
 
-        private static bool ContainsUserName(string uName)
+        private static User ContainsUserName(string uName)
         {
             foreach (User u in _users)
             {
-                if (u.userName == uName)
+                if (u.UserName == uName)
                 {
-                    return true;
+                    return u;
                 }
             }
-            return false;
+            return null;
+        }
+
+        private static bool PasswordCheck(User u, string password)
+        {
+            return u.Password == password;
         }
 
         private UserList() {}
