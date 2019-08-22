@@ -3,9 +3,10 @@ using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class User // will need a singleton to hold list of all users in the system
+    public class User 
     {
-        public Name UserName { get; set; }
+        public Name Name { get; set; }
+        public string userName { get; set; }
 
         public List<Order> UserOrderHistory { get; set; }
 

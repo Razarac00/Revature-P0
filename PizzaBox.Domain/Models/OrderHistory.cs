@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace PizzaBox.Domain.Models
 {
-    public class OrderHistory // OrderHistories as a singleton instead?
+    public class OrderHistory 
     {
-        private static List<Order> _orders;
+        private List<Order> _orders;
 
-        public static List<Order> Instance()
+        public List<Order> Instance()
         {
             if (_orders == null)
             {
@@ -15,6 +15,6 @@ namespace PizzaBox.Domain.Models
             return _orders;
         }
 
-        private OrderHistory() {}
+        public OrderHistory() {}
     }
 }

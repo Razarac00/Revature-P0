@@ -15,6 +15,18 @@ namespace PizzaBox.Domain.Models
             return _users;
         }
 
+        public static bool ContainsUserName(string name)
+        {
+            foreach (User u in _users)
+            {
+                if (u.userName == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private UserList() {}
     }
 }

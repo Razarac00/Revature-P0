@@ -75,12 +75,24 @@ namespace PizzaBox.Client
             string AccessCall = CleanString(Console.ReadLine());
             if (AccessCall == _signIn)
             {
-
+                SignInScreen();
             }
             else if (AccessCall == _register)
             {
                 
             }
+            else
+            {
+                Console.WriteLine(_invalidArgument);
+            }
+        }
+
+        public void SignInScreen()
+        {
+            Console.WriteLine("||| Sign In |||");
+            Console.WriteLine(_accountName);
+            string potentialName = CleanString(Console.ReadLine());
+            
         }
 
         private string CleanString(string arg)
