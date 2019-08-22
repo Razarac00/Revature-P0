@@ -1,37 +1,13 @@
 using System;
 using System.Collections.Generic;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Pizza : ISellable
+    public class Pizza : APizza
     {
-        public List<Topping> PizzaToppings { get; set; }
-        public Crust PizzaCrust { get; set; }
-        public Size PizzaSize { get; set; }
-
-        public decimal Price { get; set; }
-        public string Name { get; set; }
-
-        public int GetPizzaSize()
-        {
-            throw new NotImplementedException();
-        }
-
-        private decimal ComputePizzaPrice()
-        {
-            //throw new NotImplementedException();
-            decimal total = 0m;
-            foreach (var toppin in PizzaToppings)
-            {
-                total += toppin.Price;
-            }
-
-            total += PizzaCrust.Price;
-            total += PizzaSize.Price;
-
-            return total;
-        }
+        private List<Topping> _toppings;
 
         public List<Topping> GetPizzaToppings()
         {
@@ -40,7 +16,7 @@ namespace PizzaBox.Domain.Models
 
         public void AddTopping(List<Topping> toppingList)
         {
-            throw new NotImplementedException();
+            // _toppings
         }
 
         public Action AddTopping(Topping topping)

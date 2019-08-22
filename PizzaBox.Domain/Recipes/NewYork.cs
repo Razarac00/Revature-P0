@@ -4,23 +4,20 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Recipes
 {
-    public class NewYork : APizza // The Pizzamaker Machine.
+    public class NewYork : APizzaCreator // The Pizzamaker Machine.
     {
-        /**
-        new List<Topping> 
+
+        public override APizza Make()
+        {
+            var pizza = new Pizza();
+            var toppings = new List<Topping>
             {
                 new Topping("Basil"),
                 new Topping("Marinara")
-            });
-        */
-        public override List<AItem> Make(Size s, List<Topping> t)
-        {
-            var product = new List<AItem>(); // lazy instantiation
-            product.Add(new Crust("NYStyle"));
-            product.Add(s);
-            product.AddRange(t);
-            return product;
-            // return pizzatype cause pizza product is what we make;
+            };
+            var crust = new Crust("NYStyle");
+            pizza.AddTopping(toppings);
+            return pizza;
 
         }
 

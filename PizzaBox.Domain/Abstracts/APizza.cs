@@ -1,20 +1,30 @@
 using System.Collections.Generic;
+using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Abstracts
 {
-    public abstract class APizza // The Pizzamaker. The Schema.
+    public abstract class APizza  // The general pizza idea. The parts of the pizza but not the product
     {
-        protected List<AItem> _items;
-        public List<AItem> Items 
-        { 
-            get
-            {
-                return Items;
-            } 
-        }
+        public List<Topping> Toppings { get; set; }
+        public Crust Crust { get; set; }
+        public Size Size { get; set; }
 
-        public abstract List<AItem> Make(Size s, List<Topping> t);
+        public decimal Price { get => ComputePrice(); private set => Price = value; }
+
+        private decimal ComputePrice()
+        {
+            decimal total = 0m;
+            foreach (var item in Toppings)
+            {
+                total += item.Price;
+            }
+            total += Crust.Price;
+            total += Size.Price;
+
+            return total;
+        }
+        public string Name { get; set; }
 
         protected APizza()
         {
