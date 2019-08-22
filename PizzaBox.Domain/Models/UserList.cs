@@ -15,11 +15,21 @@ namespace PizzaBox.Domain.Models
             return _users;
         }
 
-        public static bool ContainsUserName(string name)
+        public static void CreateUser(string uName, string fName, string lName)
+        {
+
+        }
+
+        public static void LoginUser(string uName)
+        {
+
+        }
+
+        private static bool ContainsUserName(string uName)
         {
             foreach (User u in _users)
             {
-                if (u.userName == name)
+                if (u.userName == uName)
                 {
                     return true;
                 }

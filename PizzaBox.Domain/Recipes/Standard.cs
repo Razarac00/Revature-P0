@@ -4,7 +4,7 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Recipes
 {
-    public class NewYork : APizzaCreator // The Pizzamaker Machine.
+    public class Standard : APizzaCreator // The Pizzamaker Machine.
     {
 
         public override APizza Make()
@@ -12,10 +12,10 @@ namespace PizzaBox.Domain.Recipes
             var pizza = new Pizza();
             var toppings = new List<Topping>
             {
-                new Topping("Basil"),
-                new Topping("Marinara")
+                new Topping("Cheese"),
+                new Topping("Tomato Sauce")
             };
-            var crust = new Crust("NYStyle");
+            var crust = new Crust("traditional");
             var size = new Size("medium");
             pizza.AddTopping(toppings);
             pizza.Crust = crust;
