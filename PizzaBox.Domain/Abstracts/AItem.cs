@@ -8,18 +8,18 @@ namespace PizzaBox.Domain.Abstracts
         private string _defaultName = "Item Name";
         private decimal _defaultPrice = 1.00m;
 
-        public decimal Price 
+        public virtual decimal Price 
         { 
             get => _defaultPrice; 
             set => _defaultPrice = SetupPrice(value); 
         }
-        public string Name 
+        public virtual string Name 
         { 
             get => _defaultName; 
             set => _defaultName = SetupName(value);
         }
 
-        private decimal SetupPrice(decimal value)
+        protected decimal SetupPrice(decimal value)
         {
          decimal result = _defaultPrice;
             if (value > 0)
@@ -29,7 +29,7 @@ namespace PizzaBox.Domain.Abstracts
             return result;
         }
 
-        private string SetupName(string value)
+        protected string SetupName(string value)
         {
             string result = _defaultName;
             if (!String.IsNullOrEmpty(value))
@@ -38,6 +38,10 @@ namespace PizzaBox.Domain.Abstracts
             }
             return result;
             
+        }
+
+        public AItem()
+        {
         }
 
         public AItem(string name)
