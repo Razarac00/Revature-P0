@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PizzaBox.Domain.Models;
 
@@ -14,7 +15,6 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _select = "SELECT";
         protected static string _makeOrder = "ORDER";
         protected static string _custom = "CUSTOM";
-        // need pizza presets
         protected static string _yes = "YES";
         protected static string _no = "NO";
         protected static string _previewOrder = "CHECKOUT";
@@ -40,7 +40,7 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _viewLocations = $"To View Pizza Store Locations, type {_view} {_locations}";
         protected static string _selectALocation = $"To pick a store to order from, type {_select} and then the store Address";
         protected static string _locationSuccess = "\nLocation set! P I Z Z A T I M E\n";
-        protected static string _choosePizza = $"Make your own pizza? (type {_custom}) OR Pick a specialty? (type the Specialty name):";
+        protected static string _choosePizza = $"Make your own pizza (type {_custom}) OR pick a specialty? (type the Specialty name):";
         protected static string _chooseCrust = "Pick your crust (type the Crust name):";
         protected static string _chooseSize = "What size pizza? (type the Size)";
         protected static string _chooseToppings = "Select your toppings! No more than 5! (type the Topping name)";
@@ -51,7 +51,8 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _viewOrderHistory = $"To view your past orders, type {_view} {_history}";
 
         // Session Instances
-        protected List<User> allUsers = UserList.Instance();
+        protected ConsoleColor _color = ConsoleColor.DarkMagenta;
+        public ConsoleColor Color { get => _color; set => _color = value; } 
 
         protected string CleanString(string arg)
         {
@@ -61,6 +62,13 @@ namespace PizzaBox.Domain.Abstracts
                 result = arg.Trim().ToUpper();
             }
             return result;
+        }
+
+        protected void PrintColoredText(string textToPrint)
+        {
+            Console.ForegroundColor = Color;
+            Console.WriteLine(textToPrint);
+            Console.ResetColor();
         }
 
     }

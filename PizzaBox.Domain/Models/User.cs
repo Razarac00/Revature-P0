@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PizzaBox.Domain.Interfaces;
 
@@ -15,6 +16,21 @@ namespace PizzaBox.Domain.Models
         public Address LatestStore { get; set; }
 
         public Pizza CustomPizza { get; set; }
+
+        public void PrintOrderHistory()
+        {
+            if (UserOrderHistory == null)
+            {
+                Console.WriteLine("--- No orders yet! Order some PIZZA! ---");
+            }
+            else
+            {
+                foreach (var order in UserOrderHistory)
+                {
+                    Console.WriteLine(order.ToString());
+                }
+            }
+        }
 
     }
 }

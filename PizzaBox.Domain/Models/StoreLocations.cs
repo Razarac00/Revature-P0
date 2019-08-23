@@ -27,6 +27,18 @@ namespace PizzaBox.Domain.Models
             }
         }
 
+        public static Store GetStoreByAddress(string addressLine)
+        {
+            foreach (var store in Instance())
+            {
+                if (store.Location.AddressLine.ToUpper() == addressLine.ToUpper())
+                {
+                    return store;
+                }
+            }
+            return null;
+        }
+
         private static void Read()
         {
             var db = new projectzeroDBContext();

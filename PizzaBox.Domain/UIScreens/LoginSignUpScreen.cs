@@ -27,7 +27,7 @@ namespace PizzaBox.Domain.UIScreens
 
         private User SignInScreen()
         {
-            Console.WriteLine("||| Sign In |||");
+            PrintColoredText("||| Sign In |||");
             Console.WriteLine(_accountName);
             string potentialName = CleanString(Console.ReadLine());
             Console.WriteLine(_accountPassword);
@@ -38,7 +38,7 @@ namespace PizzaBox.Domain.UIScreens
 
         private User CreateUserScreen()
         {
-            Console.WriteLine("||| Create User |||");
+            PrintColoredText("||| Create User |||");
             Console.WriteLine(_accountName);
             string potentialName = CleanString(Console.ReadLine());
 

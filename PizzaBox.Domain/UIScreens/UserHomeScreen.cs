@@ -9,7 +9,7 @@ namespace PizzaBox.Domain.UIScreens
     {
         private Store OptionSelect(User potentialUser)
         {
-            Console.WriteLine($"\n||| HOME |||\nWelcome {potentialUser.Name.First} {potentialUser.Name.Last}");
+            PrintColoredText($"\n||| HOME |||\nWelcome {potentialUser.Name.First} {potentialUser.Name.Last}");
             Console.WriteLine(_viewOrderHistory);
             Console.WriteLine(_viewLocations);
             Console.WriteLine(_selectALocation);
@@ -30,29 +30,17 @@ namespace PizzaBox.Domain.UIScreens
             }
             else if (option == $"{_view} {_history}")
             {
-                Console.WriteLine(potentialUser.UserOrderHistory);
+                potentialUser.PrintOrderHistory();
             }
             else if (option.Contains(_select))
             {
-                store = GetStoreByAddress(option.Replace(_select, "").Trim());
+                store = StoreLocations.GetStoreByAddress(option.Replace(_select, "").Trim());
             }
             else
             {
                 Console.WriteLine(_invalidArgument);
             }
             return store;
-        }
-
-        private Store GetStoreByAddress(string addressLine)
-        {
-            foreach (var store in StoreLocations.Instance())
-            {
-                if (store.Location.AddressLine.ToUpper() == addressLine.ToUpper())
-                {
-                    return store;
-                }
-            }
-            return null;
         }
 
         internal void Begin(User potentialUser)
@@ -63,6 +51,8 @@ namespace PizzaBox.Domain.UIScreens
                 s = OptionSelect(potentialUser);
             } while (s == null);
             Console.WriteLine(_locationSuccess);
+            var userOrder = new UserOrderScreen();
+            userOrder.Begin(potentialUser, s);
         }
 
     }

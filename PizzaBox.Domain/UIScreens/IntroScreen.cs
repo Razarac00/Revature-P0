@@ -9,7 +9,7 @@ namespace PizzaBox.Domain.UIScreens
     {
         public void Begin()
         {
-            Console.WriteLine(_intro);
+            PrintColoredText(_intro);
             var userEntrance = new LoginSignUpScreen();
             userEntrance.Begin();
         }
