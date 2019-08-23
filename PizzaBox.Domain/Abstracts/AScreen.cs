@@ -21,10 +21,11 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _confirmOrder = "CONFIRM";
         protected static string _goBack = "BACK";
         protected static string _signOut = "LOGOUT";
+        protected static string _quit = "QUIT";
 
         // TUI DIRECTION BLOCK
         protected static string _invalidArgument = "\nThe input was incorrect. Please try again.\n";
-        protected static string _intro = "It's Pizza Time! Welcome to the Pizza Mausoleum!\n";
+        protected static string _intro = "It's Pizza Time! Welcome to the Pizza Box!\n";
         protected static string _welcome = $"Do you want to sign in (type {_signIn}) or create a new account (type {_register})?";
         protected static string _accountName = "Please type your username: ";
         protected static string _accountPassword = "Please type your password: ";
@@ -33,6 +34,9 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _accountLastName = "Please type your Last Name: ";
         protected static string _loginSuccess = "\nYou're all set! There's no time like pizza time!\n";
         protected static string _logoutOption = $"To Sign out of your account, type {_signOut}";
+        protected static string _loggingOut = "Logging out...";
+        protected static string _quitApplication = $"To exit Pizza Box, type {_quit}";
+        protected static string _quittingApplication = "Goodbye!";
         protected static string _viewLocations = $"To View Pizza Store Locations, type {_view} {_locations}";
         protected static string _selectALocation = $"To pick a store to order from, type {_select} and then the store Address";
         protected static string _locationSuccess = "\nLocation set! P I Z Z A T I M E\n";

@@ -12,7 +12,7 @@ namespace PizzaBox.Domain.Models
 
         public List<Order> UserOrderHistory { get; set; }
 
-        public ILocation LatestStore { get; set; }
+        public Address LatestStore { get; set; }
 
         public Pizza CustomPizza { get; set; }
 
