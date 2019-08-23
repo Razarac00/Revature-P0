@@ -8,4 +8,8 @@
     <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PizzaBox.Data\PizzaBox.Data.csproj" />
+  </ItemGroup>
+
 </Project>

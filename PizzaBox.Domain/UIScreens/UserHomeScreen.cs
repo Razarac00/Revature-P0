@@ -34,7 +34,6 @@ namespace PizzaBox.Domain.UIScreens
             }
             else if (option.Contains(_select))
             {
-                // option
                 store = GetStoreByAddress(option.Replace(_select, "").Trim());
             }
             else

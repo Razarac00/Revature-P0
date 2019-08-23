@@ -17,23 +17,24 @@ namespace PizzaBox.Testing.UnitTests
         [Fact]
         public void CanViewOrderHistory() 
         {
-
+            var user = new User();
+            var actual = user.UserOrderHistory;
         }
 
         [Fact]
-        public void OneOrderLocationADayException()
+        public void OneOrderLocationADay()
         {
 
         }
 
         [Fact]
-        public void OneOrderWithinTwoHoursException()
+        public void OneOrderWithinTwoHours()
         {
 
         }
 
         [Fact]
-        public void OnlyAccountsCanOrderException()
+        public void OnlyAccountsCanOrder()
         {
             
         }
