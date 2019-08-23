@@ -5,7 +5,8 @@ namespace PizzaBox.Domain.Models
 {
     public class User 
     {
-        public Name Name { get; set; }
+        private Name _name = new Name();
+        public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }
 

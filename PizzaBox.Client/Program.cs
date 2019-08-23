@@ -13,7 +13,8 @@ namespace PizzaBox.Client
 
         static void Main(string[] args)
         {
-            Start();
+            var p = new Program();
+            p.Start();
             //MessWithToppings();
         }
 
@@ -32,9 +33,10 @@ namespace PizzaBox.Client
         + as a user i should be able to view my order history
         + as a user i should be able to signout
         */
-        public static void Start()
+        public void Start()
         {
-            IntroScreen.Begin();
+            IntroScreen intro = new IntroScreen();
+            intro.Begin();
         }
 
 

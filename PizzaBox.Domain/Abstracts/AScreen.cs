@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using PizzaBox.Domain.Models;
+
 namespace PizzaBox.Domain.Abstracts
 {
     public abstract class AScreen
@@ -20,12 +23,14 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _signOut = "LOGOUT";
 
         // TUI DIRECTION BLOCK
-        protected static string _invalidArgument = "The input was incorrect. Please try again.";
+        protected static string _invalidArgument = "\nThe input was incorrect. Please try again.\n";
         protected static string _intro = "It's Pizza Time! Welcome to the Pizza Mausoleum!\n";
         protected static string _welcome = $"Do you want to sign in (type {_signIn}) or create a new account (type {_register})?";
         protected static string _accountName = "Please type your username: ";
         protected static string _accountPassword = "Please type your password: ";
         protected static string _confirmPassword = "Retype your password to confirm: ";
+        protected static string _accountFirstName = "Please type your First Name: ";
+        protected static string _accountLastName = "Please type your Last Name: ";
         protected static string _loginSuccess = "\nYou're all set! There's no time like pizza time!\n";
         protected static string _logoutOption = $"To Sign out of your account, type {_signOut}";
         protected static string _viewLocations = $"To View Pizza Store Locations, type {_view} {_locations}";
@@ -40,6 +45,9 @@ namespace PizzaBox.Domain.Abstracts
         protected static string _goBackToCart = $"Type {_goBack} to restart your order.";
         protected static string _confirmCartOrder = $"Type {_confirmOrder} to confirm purchase!";
         protected static string _viewOrderHistory = $"To view your past orders, type {_view} {_history}";
+
+        // Session Instances
+        protected List<User> allUsers = UserList.Instance();
 
         protected string CleanString(string arg)
         {
