@@ -26,7 +26,7 @@ namespace PizzaBox.Domain.UIScreens
             }
             else if (option == $"{_view} {_locations}")
             {
-                Console.WriteLine(StoreLocations.Instance());
+                StoreLocations.PrintStores();
             }
             else if (option == $"{_view} {_history}")
             {

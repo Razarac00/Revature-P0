@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using PizzaBox.Data.Entities;
 
 namespace PizzaBox.Domain.Models
 {
@@ -11,8 +14,42 @@ namespace PizzaBox.Domain.Models
             if (_stores == null)
             {
                 _stores = new List<Store>();
+                Read();
             }
             return _stores;
+        }
+
+        public static void PrintStores()
+        {
+            foreach (Store s in Instance())
+            {
+                Console.WriteLine(s.ToString());
+            }
+        }
+
+        private static void Read()
+        {
+            var db = new projectzeroDBContext();
+            foreach (Data.Entities.Address adb in db.Address)
+            {
+                var store = new Store();
+                store.Location.AddressLine = adb.AddressLine;
+                store.Location.City = adb.City;
+
+                _stores.Add(store);
+            }
+        }
+
+        private static void Save(Store store)
+        {
+            var db = new projectzeroDBContext();
+            db.Address.Add(new Data.Entities.Address
+            {
+                AddressLine = store.Location.AddressLine,
+                City = store.Location.City
+            });
+            db.SaveChanges();
+            StoreLocations.Instance().Add(store);
         }
 
         private StoreLocations() {}

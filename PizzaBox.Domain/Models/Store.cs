@@ -5,8 +5,9 @@ namespace PizzaBox.Domain.Models
 {
     public class Store
     {
+        private Address _location = new Address();
         private Dictionary<ISellable, int> _inventory = new Inventory().Items;
-        public Address Location { get; set; }
+        public Address Location { get => _location; set => _location = value; }
         public Dictionary<ISellable, int> Inventory { get => _inventory; set => _inventory = value; }
 
         public override string ToString()
