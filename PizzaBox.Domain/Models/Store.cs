@@ -12,7 +12,7 @@ namespace PizzaBox.Domain.Models
 
         public override string ToString()
         {
-            return $"{this.GetType().Name} Address: {Location.AddressLine}, City: {Location.City}";
+            return $"{this.GetType().Name} Address: {Location.AddressLine} City: {Location.City}";
         }
 
         // stores make pizzas, pizzas need crust, sizes, toppings...or not

@@ -20,6 +20,10 @@ namespace PizzaBox.Domain.UIScreens
                 IntroScreen intro = new IntroScreen();
                 intro.Begin();
             }
+            else if (option == _custom)
+            {
+                Console.WriteLine("Coming Soon");
+            }
             else
             {
                 Console.WriteLine(_invalidArgument);

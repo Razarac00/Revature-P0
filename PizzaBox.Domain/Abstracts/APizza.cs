@@ -4,13 +4,13 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Abstracts
 {
-    public abstract class APizza  // The general pizza idea. The parts of the pizza but not the product
+    public abstract class APizza : ISellable  // The general pizza idea. The parts of the pizza but not the product
     {
         public List<Topping> Toppings { get; set; }
         public Crust Crust { get; set; }
         public Size Size { get; set; }
 
-        public decimal Price { get => ComputePrice(); private set => Price = value; }
+        public decimal Price { get => ComputePrice(); set => Price = value; }
 
         private decimal ComputePrice()
         {

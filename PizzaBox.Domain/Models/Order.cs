@@ -10,8 +10,7 @@ namespace PizzaBox.Domain.Models
         // price <= 5000$ and pizza count < 100
         private decimal _defaultPriceLimit = 5000m;
         private int _defaultPizzaCountLimit = 100;
-        private List<ISellable> _orderItems;
-
+        private List<ISellable> _orderItems = new List<ISellable>();
         public List<ISellable> OrderItems { get => _orderItems; set => _orderItems = value; }
 
         private bool PriceLimitReached(List<ISellable> cart)
