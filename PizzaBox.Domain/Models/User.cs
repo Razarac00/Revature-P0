@@ -10,12 +10,26 @@ namespace PizzaBox.Domain.Models
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }
-
-        public List<Order> UserOrderHistory { get; set; }
-
+        public List<AddressedOrder> UserOrderHistory { get; set; }
         public Address LatestStore { get; set; }
-
+        private AddressedOrder CurrentOrder { get; set; }
         public Pizza CustomPizza { get; set; }
+
+        public AddressedOrder StartOrder(Address address)
+        {
+            var order = new Order();
+            CurrentOrder = new AddressedOrder();
+            CurrentOrder.Address = address;
+            CurrentOrder.Order = order;
+            return CurrentOrder;
+        }
+
+        public AddressedOrder FinishOrder()
+        {
+            LatestStore = CurrentOrder.Address;
+
+            return CurrentOrder;
+        }
 
         public void PrintOrderHistory()
         {
@@ -25,9 +39,9 @@ namespace PizzaBox.Domain.Models
             }
             else
             {
-                foreach (var order in UserOrderHistory)
+                foreach (var addressedOrder in UserOrderHistory)
                 {
-                    Console.WriteLine(order.ToString());
+                    Console.WriteLine(addressedOrder.ToString());
                 }
             }
         }
