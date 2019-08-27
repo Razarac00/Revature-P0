@@ -54,12 +54,34 @@ namespace PizzaBox.Testing.UnitTests
         {
             var order1 = new Order();
             var goldjalapenos = new Topping("goldjalapenos");
-            Pizza pizza = new Standard().Make() as Pizza;
+            Standard std = new Standard();
+            Pizza pizza = std.Make() as Pizza;
+
             order1.AddToOrderItems(goldjalapenos);
             order1.AddToOrderItems(pizza);
 
             var actual = order1.GetTotalPizzas();
             var expected = 1;
+
+            Assert.True(actual == expected);            
+        }
+
+        [Fact]
+        public void CheckPizzaCountLimit()
+        {
+            var order1 = new Order();
+            var goldjalapenos = new Topping("goldjalapenos");
+            Standard std = new Standard();
+            Pizza pizza = std.Make() as Pizza;
+            
+            order1.AddToOrderItems(goldjalapenos);
+            for (int i = 0; i <= 150 ; i++)
+            {
+               order1.AddToOrderItems(pizza);   
+            }
+
+            var actual = order1.GetTotalPizzas();
+            var expected = 100;
 
             Assert.True(actual == expected);            
         }
