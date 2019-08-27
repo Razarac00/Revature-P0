@@ -8,6 +8,7 @@ namespace PizzaBox.Domain.Models
     public class User 
     {
         private Name _name = new Name();
+        private int _defaultTimeLimit = 2;
         private AddressedOrder _latestOrder = new AddressedOrder();
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
@@ -28,13 +29,22 @@ namespace PizzaBox.Domain.Models
         {
             CurrentOrder.Date = DateTime.Now;
 
-            if (LatestOrder is null ||  (CurrentOrder.Date.Hour - LatestOrder.Date.Hour) >= 2)
+            if (LatestOrder is null ||  CheckTimeLimitReached())
             {
                 Save(CurrentOrder);
                 return CurrentOrder;
             }
 
             return null;
+        }
+
+        private bool CheckTimeLimitReached()
+        {
+            var tempDate = LatestOrder.Date;
+            tempDate.AddHours(_defaultTimeLimit);
+
+            var result = tempDate.CompareTo(CurrentOrder.Date) >= 0;
+            return result;
         }
 
         private void Save(AddressedOrder currentOrder)
