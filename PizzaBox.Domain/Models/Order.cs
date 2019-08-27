@@ -11,7 +11,31 @@ namespace PizzaBox.Domain.Models
         private decimal _defaultPriceLimit = 5000m;
         private int _defaultPizzaCountLimit = 100;
         private List<ISellable> _orderItems = new List<ISellable>();
-        public List<ISellable> OrderItems { get => _orderItems; set => _orderItems = value; }
+        private List<ISellable> OrderItems { get => _orderItems; set => _orderItems = value; }
+
+        public void AddToOrderItems(ISellable item)
+        {
+            OrderItems.Add(item);
+            if (PriceLimitReached(OrderItems) || PizzaLimitReached(OrderItems))
+            {
+                OrderItems.Remove(item);
+            }
+        }
+
+        public bool RemoveFromOrderItems(ISellable item)
+        {
+            return OrderItems.Remove(item);
+        }
+
+        public decimal ComputeTotalPrice()
+        {
+            return ComputeTotalPrice(OrderItems);
+        }
+
+        public int GetTotalPizzas()
+        {
+            return CountTotalPizzas(OrderItems);
+        }
 
         private bool PriceLimitReached(List<ISellable> cart)
         {

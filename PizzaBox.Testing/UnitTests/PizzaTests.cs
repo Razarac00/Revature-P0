@@ -23,7 +23,7 @@ namespace PizzaBox.Testing.UnitTests
             var expected = new Size("medium");
             var actual = pizza.Size;
 
-            Assert.True(expected == actual);
+            Assert.True(expected.Name == actual.Name);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace PizzaBox.Testing.UnitTests
         var pizza = new Pizza();
         
         //When
-        var expected = 9.99m;
+        var expected = 2.50m;
         var actual = pizza.Price;
         
         //Then
@@ -83,13 +83,13 @@ namespace PizzaBox.Testing.UnitTests
         {
         //Given
         var pizza = new Pizza();
-        var CrustName = "Traditional";
+        var CrustName = "traditional";
         //When
         var expected = new Crust(CrustName);
         var actual = pizza.Crust;
 
         //Then
-        Assert.True(expected == actual);
+        Assert.True(expected.Name == actual.Name);
         }
     }
 }

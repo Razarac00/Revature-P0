@@ -3,18 +3,18 @@ using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Topping : AItem, ISellable
+    public class Topping : AItem
     {
         private decimal _defaultPrice = 0.50m;
-        public new decimal Price 
+        public override decimal Price 
         { 
             get 
             {
-                return this._defaultPrice;
+                return _defaultPrice;
             } 
             set
             {
-                this._defaultPrice = value; 
+                _defaultPrice = value; 
             }
         }
 

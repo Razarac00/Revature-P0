@@ -21,7 +21,10 @@ namespace PizzaBox.Domain.Models
         {
             var temp = new List<Topping>();
             temp.AddRange(Toppings);
-            temp.AddRange(potentialToppings);
+            if (potentialToppings != null)
+            {
+                temp.AddRange(potentialToppings);
+            }
             return temp.Count <= _defaultMaxToppings;
         }
 

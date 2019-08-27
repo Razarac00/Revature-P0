@@ -25,6 +25,11 @@ namespace PizzaBox.Domain.Models
             return CurrentOrder;
         }
 
+        public void AddToOrder()
+        {
+            
+        }
+
         public AddressedOrder FinishOrder()
         {
             CurrentOrder.Date = DateTime.Now;
