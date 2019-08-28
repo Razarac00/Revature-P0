@@ -9,6 +9,13 @@ namespace PizzaBox.Domain.Models
     {
         private int _defaultMaxToppings = 5;
 
+        public void GarnishPizza(List<Topping> toppings, Crust crust, Size size)
+        {
+            AddTopping(toppings);
+            Crust = crust;
+            Size = size;
+        }
+
         public void AddTopping(List<Topping> toppingList)
         {
             if (CheckToppings(toppingList))

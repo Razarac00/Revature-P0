@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using PizzaBox.Data.Entities;
 using PizzaBox.Domain.Interfaces;
+using PizzaBox.Domain.Recipes;
 
 namespace PizzaBox.Domain.Models
 {
@@ -10,6 +13,7 @@ namespace PizzaBox.Domain.Models
         private Name _name = new Name();
         private int _defaultTimeLimit = 2;
         private AddressedOrder _latestOrder = new AddressedOrder();
+        private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -25,9 +29,43 @@ namespace PizzaBox.Domain.Models
             return CurrentOrder;
         }
 
-        public void AddToOrder()
+        public void AddToOrder(string itemType, List<Topping> toppings, Crust crust, Size size)
         {
+            // var recipeList = getRecipes();
+            // foreach (var recipeType in recipeList)
+            // {
+            //     if (itemType == recipeType.Name)
+            //     {
+            //         recipeType std = Activator.CreateInstance<recipeType>();
+                    
+            //     }
+            // }
+            Pizza pizza = null;
+            if (itemType == "Standard")
+            {
+                Standard std = new Standard();
+                pizza = std.Make() as Pizza;
+            }
+            else if (itemType == "NewYork")
+            {
+                NewYork ny = new NewYork();
+                pizza = ny.Make() as Pizza;
+            }
             
+            if (pizza != null)
+            {
+                pizza.GarnishPizza(toppings, crust, size);
+                CurrentOrder.Order.AddToOrderItems(pizza);
+            }
+
+        }
+
+        private List<System.Type> getRecipes()
+        {
+            var query = from classTypes in Assembly.GetExecutingAssembly().GetTypes()
+                    where classTypes.IsClass && classTypes.Namespace == _recipeNameSpace
+                    select classTypes;
+            return query.ToList();
         }
 
         public AddressedOrder FinishOrder()
