@@ -1,18 +1,34 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using PizzaBox.Data.Entities;
 
 namespace PizzaBox.Domain.Models
 {
     public class OrderHistory 
     {
-        private List<Order> _orders;
+        private List<AddressedOrder> _orders = new List<AddressedOrder>();
 
-        public List<Order> Instance()
+        public List<AddressedOrder> Orders { get => _orders; set => _orders = value; }
+
+        private void Read()
         {
-            if (_orders == null)
+            var db = new projectzeroDBContext();
+            foreach (Data.Entities.UserOrders uOrder in db.UserOrders)
             {
-                _orders = new List<Order>();
+                var aOrder = new AddressedOrder();
+                aOrder.Address.AddressLine = uOrder.Address.AddressLine;
+                aOrder.Address.City = uOrder.Address.City;
+                aOrder.Date = uOrder.OrderDate;
+                var order = from OrderPizzas op in db.UserOrders.Include("OrderPizzas").ToList()
+                            where op.UserOrderId == uOrder.UserOrderId
+                            select op;
+                var ordList = new Order();
+                // ordList.AddToOrderItems(order.ToList());
+                aOrder.Order = ordList;
+
+                Orders.Add(aOrder);
             }
-            return _orders;
         }
 
         public OrderHistory() {}

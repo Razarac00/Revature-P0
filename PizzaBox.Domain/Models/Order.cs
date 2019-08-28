@@ -22,6 +22,14 @@ namespace PizzaBox.Domain.Models
             }
         }
 
+        public void AddToOrderItems(List<ISellable> items)
+        {
+            foreach (var item in items)
+            {
+                AddToOrderItems(item);
+            }
+        }
+
         public bool RemoveFromOrderItems(ISellable item)
         {
             return OrderItems.Remove(item);
