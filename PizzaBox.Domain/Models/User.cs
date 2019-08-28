@@ -60,6 +60,11 @@ namespace PizzaBox.Domain.Models
 
         }
 
+        public bool removeFromOrder(Pizza pizza)
+        {
+            return CurrentOrder.Order.RemoveFromOrderItems(pizza);
+        }
+
         private List<System.Type> getRecipes()
         {
             var query = from classTypes in Assembly.GetExecutingAssembly().GetTypes()

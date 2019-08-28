@@ -16,7 +16,7 @@ namespace PizzaBox.Domain.Recipes
                 new Topping("Tomato Sauce")
             };
             var crust = new Crust("Traditional");
-            var size = new Size("Medium");
+            var size = new Size("medium");
             pizza.AddTopping(toppings);
             pizza.Crust = crust;
             pizza.Size = size;
