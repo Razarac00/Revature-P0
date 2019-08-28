@@ -8,6 +8,7 @@ namespace PizzaBox.Data.Entities
         public Topping()
         {
             PizzaToppings = new HashSet<PizzaToppings>();
+            ToppingInventory = new HashSet<ToppingInventory>();
         }
 
         public int ToppingId { get; set; }
@@ -16,5 +17,6 @@ namespace PizzaBox.Data.Entities
         public bool Active { get; set; }
 
         public virtual ICollection<PizzaToppings> PizzaToppings { get; set; }
+        public virtual ICollection<ToppingInventory> ToppingInventory { get; set; }
     }
 }

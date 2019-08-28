@@ -17,13 +17,13 @@ namespace PizzaBox.Data.Entities
 
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Crust> Crust { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<CrustInventory> CrustInventory { get; set; }
+        public virtual DbSet<OrderPizzas> OrderPizzas { get; set; }
         public virtual DbSet<Pizza> Pizza { get; set; }
         public virtual DbSet<PizzaToppings> PizzaToppings { get; set; }
-        public virtual DbSet<RecentStores> RecentStores { get; set; }
         public virtual DbSet<Size> Size { get; set; }
-        public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Topping> Topping { get; set; }
+        public virtual DbSet<ToppingInventory> ToppingInventory { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserOrders> UserOrders { get; set; }
 
@@ -68,13 +68,52 @@ namespace PizzaBox.Data.Entities
                 entity.Property(e => e.Price).HasColumnType("decimal(2, 2)");
             });
 
-            modelBuilder.Entity<Order>(entity =>
+            modelBuilder.Entity<CrustInventory>(entity =>
             {
-                entity.ToTable("Order", "User");
+                entity.HasKey(e => new { e.AddressId, e.CrustId })
+                    .HasName("PK_ACID");
 
-                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+                entity.ToTable("CrustInventory", "Store");
 
-                entity.Property(e => e.OrderDate).HasColumnType("datetime2(0)");
+                entity.Property(e => e.AddressId).HasColumnName("AddressID");
+
+                entity.Property(e => e.CrustId).HasColumnName("CrustID");
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.CrustInventory)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CAddressID");
+
+                entity.HasOne(d => d.Crust)
+                    .WithMany(p => p.CrustInventory)
+                    .HasForeignKey(d => d.CrustId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CCrustID");
+            });
+
+            modelBuilder.Entity<OrderPizzas>(entity =>
+            {
+                entity.HasKey(e => new { e.UserOrderId, e.PizzaId })
+                    .HasName("PK_UPID");
+
+                entity.ToTable("OrderPizzas", "User");
+
+                entity.Property(e => e.UserOrderId).HasColumnName("UserOrderID");
+
+                entity.Property(e => e.PizzaId).HasColumnName("PizzaID");
+
+                entity.HasOne(d => d.Pizza)
+                    .WithMany(p => p.OrderPizzas)
+                    .HasForeignKey(d => d.PizzaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserPizzaID");
+
+                entity.HasOne(d => d.UserOrder)
+                    .WithMany(p => p.OrderPizzas)
+                    .HasForeignKey(d => d.UserOrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserOrderID");
             });
 
             modelBuilder.Entity<Pizza>(entity =>
@@ -84,6 +123,8 @@ namespace PizzaBox.Data.Entities
                 entity.Property(e => e.PizzaId).HasColumnName("PizzaID");
 
                 entity.Property(e => e.CrustId).HasColumnName("CrustID");
+
+                entity.Property(e => e.PizzaName).HasMaxLength(25);
 
                 entity.Property(e => e.SizeId).HasColumnName("SizeID");
 
@@ -126,32 +167,6 @@ namespace PizzaBox.Data.Entities
                     .HasConstraintName("FK_ToppingID");
             });
 
-            modelBuilder.Entity<RecentStores>(entity =>
-            {
-                entity.HasKey(e => e.RecentStoreId)
-                    .HasName("PK_RecentStoreID");
-
-                entity.ToTable("RecentStores", "User");
-
-                entity.Property(e => e.RecentStoreId).HasColumnName("RecentStoreID");
-
-                entity.Property(e => e.StoreId).HasColumnName("StoreID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.Store)
-                    .WithMany(p => p.RecentStores)
-                    .HasForeignKey(d => d.StoreId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_StoreID");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.RecentStores)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserID");
-            });
-
             modelBuilder.Entity<Size>(entity =>
             {
                 entity.ToTable("Size", "Pizza");
@@ -166,15 +181,6 @@ namespace PizzaBox.Data.Entities
                     .HasMaxLength(25);
             });
 
-            modelBuilder.Entity<Store>(entity =>
-            {
-                entity.ToTable("Store", "Store");
-
-                entity.Property(e => e.StoreId).HasColumnName("StoreID");
-
-                entity.Property(e => e.AddressId).HasColumnName("AddressID");
-            });
-
             modelBuilder.Entity<Topping>(entity =>
             {
                 entity.ToTable("Topping", "Pizza");
@@ -186,6 +192,30 @@ namespace PizzaBox.Data.Entities
                 entity.Property(e => e.ToppingName)
                     .IsRequired()
                     .HasMaxLength(25);
+            });
+
+            modelBuilder.Entity<ToppingInventory>(entity =>
+            {
+                entity.HasKey(e => new { e.AddressId, e.ToppingId })
+                    .HasName("PK_ATID");
+
+                entity.ToTable("ToppingInventory", "Store");
+
+                entity.Property(e => e.AddressId).HasColumnName("AddressID");
+
+                entity.Property(e => e.ToppingId).HasColumnName("ToppingID");
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.ToppingInventory)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TAddressID");
+
+                entity.HasOne(d => d.Topping)
+                    .WithMany(p => p.ToppingInventory)
+                    .HasForeignKey(d => d.ToppingId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TToppingID");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -220,15 +250,17 @@ namespace PizzaBox.Data.Entities
 
                 entity.Property(e => e.UserOrderId).HasColumnName("UserOrderID");
 
-                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+                entity.Property(e => e.AddressId).HasColumnName("AddressID");
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime2(0)");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.Order)
+                entity.HasOne(d => d.Address)
                     .WithMany(p => p.UserOrders)
-                    .HasForeignKey(d => d.OrderId)
+                    .HasForeignKey(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderID");
+                    .HasConstraintName("FK_AddressID");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserOrders)

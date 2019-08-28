@@ -98,9 +98,10 @@ namespace PizzaBox.Domain.Models
         private void Save(AddressedOrder currentOrder)
         {
             var db = new projectzeroDBContext();
-            db.Order.Add(new Data.Entities.Order
+            db.UserOrders.Add(new Data.Entities.UserOrders
             {
                 OrderDate = currentOrder.Date,
+                // AddressId = ,
                 Active = true
             });
             LatestOrder = CurrentOrder;

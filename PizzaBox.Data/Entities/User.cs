@@ -7,7 +7,6 @@ namespace PizzaBox.Data.Entities
     {
         public User()
         {
-            RecentStores = new HashSet<RecentStores>();
             UserOrders = new HashSet<UserOrders>();
         }
 
@@ -18,7 +17,6 @@ namespace PizzaBox.Data.Entities
         public string LastName { get; set; }
         public bool Active { get; set; }
 
-        public virtual ICollection<RecentStores> RecentStores { get; set; }
         public virtual ICollection<UserOrders> UserOrders { get; set; }
     }
 }

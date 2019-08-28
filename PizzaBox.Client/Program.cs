@@ -15,7 +15,6 @@ namespace PizzaBox.Client
         {
             var p = new Program();
             p.Start();
-            //MessWithToppings();
         }
 
         /**
@@ -37,19 +36,6 @@ namespace PizzaBox.Client
         {
             IntroScreen intro = new IntroScreen();
             intro.Begin();
-        }
-
-
-
-
-        private string CleanString(string arg)
-        {
-            var result = "";
-            if (arg != null)
-            {
-                result = arg.Trim().ToUpper();
-            }
-            return result;
         }
 
         public void MessWithToppings()
