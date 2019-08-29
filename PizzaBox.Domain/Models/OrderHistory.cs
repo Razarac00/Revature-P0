@@ -23,9 +23,9 @@ namespace PizzaBox.Domain.Models
                 var order = from OrderPizzas op in db.UserOrders.Include("OrderPizzas").ToList()
                             where op.UserOrderId == uOrder.UserOrderId
                             select op;
-                var ordList = new Order();
-                // ordList.AddToOrderItems(order.ToList());
-                aOrder.Order = ordList;
+                var ordList = new List<Order>();
+                // ordList.AddRange(order.ToList());
+                // aOrder.Order = ordList;
 
                 Orders.Add(aOrder);
             }

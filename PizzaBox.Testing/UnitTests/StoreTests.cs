@@ -19,9 +19,18 @@ namespace PizzaBox.Testing.UnitTests
         {
         //Given
         var store = new Store();
+        var address1 = new Address("test1", "city1");
+        // store.Location = address1;
+        var order1 = new Order();
+        var addressedOrder = new AddressedOrder(address1, order1);
+        // store.StoreOrderHistory.Orders.Add(addressedOrder);
+
         //When
+        var expected = new List<AddressedOrder> {addressedOrder};
         var actual = store.ViewOrders();
+
         //Then
+        Assert.True(expected.Equals(actual));
         }
 
         [Fact]

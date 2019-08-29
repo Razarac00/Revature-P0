@@ -2,6 +2,8 @@ using System;
 using Xunit;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Recipes;
+using System.Collections.Generic;
+using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Testing.UnitTests
 {
@@ -17,7 +19,19 @@ namespace PizzaBox.Testing.UnitTests
         [Fact]
         public void CanViewOrder()
         {
+            var order1 = new Order();
+            var goldjalapenos = new Topping("goldjalapenos", 250m);
+            var jalaList = new List<ISellable>();
+            for (int i = 0; i <= 3; i++)
+            {
+                order1.AddToOrderItems(goldjalapenos);
+                jalaList.Add(goldjalapenos);
+            }
 
+            var expected = $"Order {jalaList}";
+            var actual = order1.ToString();
+
+            Assert.True(expected == actual);
         }
 
         [Fact]

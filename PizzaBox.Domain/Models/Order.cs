@@ -77,5 +77,10 @@ namespace PizzaBox.Domain.Models
             }
             return total;
         }
+
+        public override string ToString()
+        {
+            return $"Order {OrderItems.ToString()}";
+        } 
     }
 }
