@@ -20,7 +20,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var store = new Store();
         //When
-        
+        var actual = store.ViewOrders();
         //Then
         }
 
@@ -28,9 +28,9 @@ namespace PizzaBox.Testing.UnitTests
         public void CanViewSales()
         {
         //Given
-        
+        var store = new Store();
         //When
-        
+        var actual = store.ViewSales();
         //Then
         }
 
@@ -50,9 +50,9 @@ namespace PizzaBox.Testing.UnitTests
         public void CanViewUsers()
         {
         //Given
-        
+        var store = new Store();
         //When
-        
+        var actual = store.ViewUsers();
         //Then
         }
     }

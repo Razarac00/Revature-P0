@@ -12,12 +12,13 @@ namespace PizzaBox.Domain.Models
     {
         private Name _name = new Name();
         private int _defaultTimeLimit = 2;
+        private int _defaultStoreTImeLimit = 24;
         private AddressedOrder _latestOrder = new AddressedOrder();
         private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public List<AddressedOrder> UserOrderHistory { get; set; }
+        public OrderHistory UserOrderHistory { get; set; }
         public AddressedOrder LatestOrder { get => _latestOrder; set => _latestOrder = value; }
         private AddressedOrder CurrentOrder { get; set; }
         public Pizza CustomPizza { get; set; }
@@ -26,6 +27,7 @@ namespace PizzaBox.Domain.Models
         {
             var order = new Order();
             CurrentOrder = new AddressedOrder(address, order);
+            CurrentOrder.OrderUser = this;
             return CurrentOrder;
         }
 
@@ -76,8 +78,9 @@ namespace PizzaBox.Domain.Models
         public AddressedOrder FinishOrder()
         {
             CurrentOrder.Date = DateTime.Now;
+            CurrentOrder.FinalPrice = CurrentOrder.Order.ComputeTotalPrice();
 
-            if (LatestOrder is null ||  CheckTimeLimitReached())
+            if (LatestOrder is null ||  (CheckTimeLimitReached() && !CheckDailyStoreLimitReached()))
             {
                 Save(CurrentOrder);
                 return CurrentOrder;
@@ -88,10 +91,31 @@ namespace PizzaBox.Domain.Models
 
         private bool CheckTimeLimitReached()
         {
-            var tempDate = LatestOrder.Date;
-            tempDate.AddHours(_defaultTimeLimit);
+            var result = true;
+            if (LatestOrder != null)
+            {
+                var tempDate = LatestOrder.Date;
+                tempDate = tempDate.AddHours(_defaultTimeLimit);
 
-            var result = tempDate.CompareTo(CurrentOrder.Date) >= 0;
+                result = tempDate.CompareTo(CurrentOrder.Date) >= 0;
+            }
+            
+            return result;
+        }
+
+        private bool CheckDailyStoreLimitReached()
+        {
+            var result = false;
+            if (LatestOrder != null)
+            {
+                if (LatestOrder.Address != CurrentOrder.Address)
+                {
+                    var tempDate = LatestOrder.Date;
+                    tempDate = tempDate.AddHours(_defaultStoreTImeLimit);
+
+                    result = tempDate.CompareTo(CurrentOrder.Date) < 0;
+                }
+            }
             return result;
         }
 
@@ -105,7 +129,7 @@ namespace PizzaBox.Domain.Models
                 Active = true
             });
             LatestOrder = CurrentOrder;
-            UserOrderHistory.Add(CurrentOrder);
+            UserOrderHistory.Orders.Add(CurrentOrder);
             //db.SaveChanges();
         }
 
@@ -117,7 +141,7 @@ namespace PizzaBox.Domain.Models
             }
             else
             {
-                foreach (var addressedOrder in UserOrderHistory)
+                foreach (var addressedOrder in UserOrderHistory.Orders)
                 {
                     Console.WriteLine(addressedOrder.ToString());
                 }

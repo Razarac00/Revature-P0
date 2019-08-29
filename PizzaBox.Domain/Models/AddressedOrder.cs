@@ -8,9 +8,12 @@ namespace PizzaBox.Domain.Models
         private DateTime _date = new DateTime();
         private Address _address = new Address();
         private Order _order = new Order();
+        private User _orderUser = new User();
         public Address Address { get => _address; set => _address = value; }
         public Order Order { get => _order; set => _order = value; }
         public DateTime Date { get => _date; set => _date = value; }
+        public User OrderUser { get => _orderUser; set => _orderUser = value; }
+        public decimal FinalPrice { get; set; }
 
         public override string ToString()
         {
