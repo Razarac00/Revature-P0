@@ -9,7 +9,7 @@ namespace PizzaBox.Domain.Models
     public class Crust : AItem
     {
         private decimal _defaultPrice = 1.50m;
-
+        public int CrustId { get; set; }
         public override decimal Price
         {
             get => _defaultPrice;

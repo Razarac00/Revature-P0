@@ -13,6 +13,7 @@ namespace PizzaBox.Domain.Abstracts
         private Crust _crust = new Crust(_defaultCrust);
         private Size _size = new Size(_defaultSize);
         private decimal _price = 0m;
+        public int APizzaId { get; set; }
         public List<Topping> Toppings { get => _toppings; set => _toppings = value; }
         public Crust Crust { get => _crust; set => _crust = value; }
         public Size Size { get => _size; set => _size = value; }

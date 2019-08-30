@@ -2,6 +2,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Address
     {
+        public int AddressId { get; set; }
         public string AddressLine { get; set; }
         public string City { get; set; }
 
