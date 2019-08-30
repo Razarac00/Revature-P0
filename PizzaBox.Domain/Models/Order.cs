@@ -5,6 +5,9 @@ namespace PizzaBox.Domain.Models
 {
     public class Order
     {
+        public int OrderId { get; set; }
+        public int AddressedOrderId { get; set; }
+        public AddressedOrder AddressedOrder { get; set; }
         // list of items
         // total price in decimal
         // price <= 5000$ and pizza count < 100
@@ -12,7 +15,6 @@ namespace PizzaBox.Domain.Models
         private int _defaultPizzaCountLimit = 100;
         private List<ISellable> _orderItems = new List<ISellable>();
         private List<ISellable> OrderItems { get => _orderItems; set => _orderItems = value; }
-        public int OrderId { get; set; }
         public void AddToOrderItems(ISellable item)
         {
             OrderItems.Add(item);
