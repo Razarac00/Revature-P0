@@ -8,7 +8,7 @@ namespace PizzaBox.Domain.Models
         private DateTime _date = new DateTime();
         private Address _address = new Address();
         private Order _order = new Order();
-        private User _orderUser = new User();
+        private User _orderUser;
         public Address Address { get => _address; set => _address = value; }
         public Order Order { get => _order; set => _order = value; }
         public DateTime Date { get => _date; set => _date = value; }
@@ -24,6 +24,7 @@ namespace PizzaBox.Domain.Models
         {
             Address = address;
             Order = order;
+            FinalPrice = order.ComputeTotalPrice();
         }
 
         public AddressedOrder()

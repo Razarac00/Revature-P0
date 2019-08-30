@@ -58,7 +58,7 @@ namespace PizzaBox.Domain.Abstracts
         }
         public string Name { get; set; }
 
-        protected APizza()
+        public APizza()
         {
         } 
     }

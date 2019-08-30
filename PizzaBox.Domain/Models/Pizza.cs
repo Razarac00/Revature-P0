@@ -39,5 +39,10 @@ namespace PizzaBox.Domain.Models
         {
             AddTopping(new List<Topping> {topping});
         }
+
+        public Pizza() : base()
+        {
+
+        }
     }
 }
