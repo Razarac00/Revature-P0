@@ -5,8 +5,11 @@ using System.Linq;
 
 namespace PizzaBox.Domain.Models
 {
-    public class Inventory // Inventories-- a single list of inventories kept by all stores. Singleton makes sense with that
+    public class Inventory 
     {
+        public int InventoryId { get; set; }
+        public int StoreId { get; set; }
+        public Store Store { get; set; }
         /**
         An Inventory contains a list of ingredients--sellables--available to a store
         + Must be able to add/remove sellables from inventory

@@ -6,10 +6,12 @@ namespace PizzaBox.Data
     public class ProjectZeroTwoDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<OrderHistory> OrderHistories { get; set; }
         public DbSet<AddressedOrder> AddressedOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Topping> Toppings { get; set; }
         public DbSet<Crust> Crusts { get; set; }
