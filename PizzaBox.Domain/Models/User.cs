@@ -15,6 +15,7 @@ namespace PizzaBox.Domain.Models
         private int _defaultStoreTImeLimit = 24;
         private AddressedOrder _latestOrder = new AddressedOrder();
         private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
+        public int UserId { get; set; }
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }

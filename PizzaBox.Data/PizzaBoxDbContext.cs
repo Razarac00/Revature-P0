@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Data
 {
@@ -11,7 +12,8 @@ namespace PizzaBox.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+            builder.Entity<User>().HasKey(u => u.UserId);
+            builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
         }
     }    
 }
