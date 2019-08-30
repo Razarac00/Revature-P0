@@ -6,6 +6,8 @@ namespace PizzaBox.Domain.Models
 {
     public class Store
     {
+        public int StoreId { get; set; }
+        public int AddressId { get; set; }
         private int _defaultRecentUserTimeLimit = 24;
         private Address _location = new Address();
         private OrderHistory _storeOrderHistory = new OrderHistory();

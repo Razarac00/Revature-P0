@@ -25,7 +25,7 @@ namespace PizzaBox.Data
             builder.Entity<User>().HasKey(u => u.UserId);
             builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             builder.Entity<User>().HasOne(u => u.Name);
-            builder.Entity<User>().HasOne(u => u.UserOrderHistory);
+            // builder.Entity<User>().HasOne(u => u.UserOrderHistory);
             // builder.Entity<User>().HasMany(u => u.UserOrderHistory.Orders).WithOne(o => o.OrderUser).HasForeignKey(u => u.AddressedOrderId);
             
         }
