@@ -3,7 +3,7 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Data
 {
-    public class PizzaBoxDbContext : DbContext
+    public class ProjectZeroTwoDBContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
