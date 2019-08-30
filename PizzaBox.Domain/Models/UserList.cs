@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using PizzaBox.Data.Entities;
+// using PizzaBox.Data.Entities;
 
 namespace PizzaBox.Domain.Models
 {
@@ -10,12 +10,12 @@ namespace PizzaBox.Domain.Models
         
         public static List<User> Instance()
         {
-            projectzeroDBContext db = new projectzeroDBContext();
+            // projectzeroDBContext db = new projectzeroDBContext();
 
             if (_users == null)
             {
                 _users = new List<User>();
-                Read();
+                //Read();
             }
             return _users;
         }
@@ -29,7 +29,7 @@ namespace PizzaBox.Domain.Models
                 user.Name.First = fName;
                 user.Name.Last = lName;
                 user.Password = password;
-                Save(user);
+                //Save(user);
                 return user;
             }
             return null;
@@ -45,34 +45,34 @@ namespace PizzaBox.Domain.Models
             return null;
         }
 
-        private static void Read()
-        {
-            var db = new projectzeroDBContext();
-            foreach (Data.Entities.User u in db.User)
-            {
-                var user = new User();
-                user.UserName = u.UserName;
-                user.Name.First = u.FirstName;
-                user.Name.Last = u.LastName;
-                user.Password = u.Password;
+        // private static void Read()
+        // {
+        //     var db = new projectzeroDBContext();
+        //     foreach (Data.Entities.User u in db.User)
+        //     {
+        //         var user = new User();
+        //         user.UserName = u.UserName;
+        //         user.Name.First = u.FirstName;
+        //         user.Name.Last = u.LastName;
+        //         user.Password = u.Password;
 
-                _users.Add(user);
-            }
-        }
+        //         _users.Add(user);
+        //     }
+        // }
 
-        private static void Save(User user)
-        {
-            var db = new projectzeroDBContext();
-            db.User.Add(new Data.Entities.User
-            {
-                UserName = user.UserName,
-                FirstName = user.Name.First,
-                LastName = user.Name.Last,
-                Password = user.Password
-            });
-            db.SaveChanges();
-            UserList.Instance().Add(user);
-        }
+        // private static void Save(User user)
+        // {
+        //     var db = new projectzeroDBContext();
+        //     db.User.Add(new Data.Entities.User
+        //     {
+        //         UserName = user.UserName,
+        //         FirstName = user.Name.First,
+        //         LastName = user.Name.Last,
+        //         Password = user.Password
+        //     });
+        //     db.SaveChanges();
+        //     UserList.Instance().Add(user);
+        // }
 
         private static User ContainsUserName(string uName)
         {

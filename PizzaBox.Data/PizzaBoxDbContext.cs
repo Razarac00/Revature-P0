@@ -11,7 +11,7 @@ namespace PizzaBox.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            
         }
     }    
 }

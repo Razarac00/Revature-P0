@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using EF = PizzaBox.Data.Entities;
+// using EF = PizzaBox.Data.Entities;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
@@ -19,19 +19,19 @@ namespace PizzaBox.Domain.Abstracts
 
         public decimal Price { get => getPrice(); set => _price = value; }
 
-        private void Save()
-        {
-            var db = new EF.projectzeroDBContext();
-            db.Pizza.Add(new Data.Entities.Pizza
-            {
-                //PizzaName = Name,
-                // = Price,
-                // CrustId = new EF.Crust
-                Active = true
-            });
+        // private void Save()
+        // {
+        //     var db = new EF.projectzeroDBContext();
+        //     db.Pizza.Add(new Data.Entities.Pizza
+        //     {
+        //         //PizzaName = Name,
+        //         // = Price,
+        //         // CrustId = new EF.Crust
+        //         Active = true
+        //     });
             
-            db.SaveChanges();
-        }
+        //     db.SaveChanges();
+        // }
 
         private decimal getPrice()
         {
