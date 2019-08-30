@@ -15,8 +15,8 @@ namespace PizzaBox.Domain.Models
         + Must be able to add/remove sellables from inventory
         + Must be able to view all sellables in inventory
         */
-        private Dictionary<ISellable, int> _items = new Dictionary<ISellable, int>();
-        public Dictionary<ISellable, int> Items { get => _items; set => _items = value; }
+        private List<InventoryItem> _items = new List<InventoryItem>();
+        public List<InventoryItem> Items { get => _items; set => _items = value; }
 
         public Inventory() {}
     }
