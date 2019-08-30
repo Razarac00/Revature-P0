@@ -8,5 +8,15 @@ namespace PizzaBox.Domain.Models
         public int InventoryItemId { get; set; }
         public AItem Item { get; set; }
         public int Amount { get; set; }
+
+        public InventoryItem()
+        {
+        }
+
+        public InventoryItem(AItem item, int amount)
+        {
+            Item = item;
+            Amount = amount;
+        }
     }
 }

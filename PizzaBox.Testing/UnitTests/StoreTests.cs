@@ -64,10 +64,10 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var store = new Store();
         //When
-        Dictionary<ISellable, int> actual = store.Inventory;
+        List<InventoryItem> actual = store.Inventory;
         
         //Then
-        Assert.IsType<Dictionary<ISellable, int>>(actual);
+        Assert.IsType<List<InventoryItem>>(actual);
         }
 
         [Fact]
