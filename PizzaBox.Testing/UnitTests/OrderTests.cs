@@ -21,14 +21,14 @@ namespace PizzaBox.Testing.UnitTests
         {
             var order1 = new Order();
             var goldjalapenos = new Topping("goldjalapenos", 250m);
-            var jalaList = new List<ISellable>();
+            var jalaList = $"Order ";
             for (int i = 0; i <= 3; i++)
             {
                 order1.AddToOrderItems(goldjalapenos);
-                jalaList.Add(goldjalapenos);
+                jalaList = jalaList + " " + goldjalapenos.ToString();
             }
 
-            var expected = $"Order {jalaList}";
+            var expected = jalaList;
             var actual = order1.ToString();
 
             Assert.True(expected == actual);

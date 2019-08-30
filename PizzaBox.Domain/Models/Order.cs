@@ -80,7 +80,12 @@ namespace PizzaBox.Domain.Models
 
         public override string ToString()
         {
-            return $"Order {OrderItems.ToString()}";
+            var result = $"Order ";
+            foreach (var item in OrderItems)
+            {
+                result = result + " " + item.ToString();
+            }
+            return result;
         } 
     }
 }
