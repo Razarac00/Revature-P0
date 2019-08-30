@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Data
