@@ -5,6 +5,7 @@ namespace PizzaBox.Domain.Abstracts
 {
     public abstract class AItem : ISellable
     {
+        public int AItemId { get; set; }
         private string _defaultName = "Item Name";
         private decimal _defaultPrice = 1.00m;
 

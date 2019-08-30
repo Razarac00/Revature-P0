@@ -10,6 +10,7 @@ namespace PizzaBox.Domain.Models
         private Order _order = new Order();
         private User _orderUser;
         public int AddressedOrderId { get; set; }
+        public int UserId { get; set; }
         public Address Address { get => _address; set => _address = value; }
         public Order Order { get => _order; set => _order = value; }
         public DateTime Date { get => _date; set => _date = value; }

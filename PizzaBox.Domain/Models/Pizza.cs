@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Pizza : APizza
     {
+        public int PizzaId { get; set; }
         private int _defaultMaxToppings = 5;
 
         public void GarnishPizza(List<Topping> toppings, Crust crust, Size size)

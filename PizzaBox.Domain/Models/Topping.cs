@@ -6,6 +6,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Topping : AItem
     {
+        public int ToppingId { get; set; }
         private decimal _defaultPrice = 0.50m;
         public override decimal Price 
         { 

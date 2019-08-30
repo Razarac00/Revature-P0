@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
 {
     public class Size : AItem
     {
+        public int SizeId { get; set; }
         // private void Save()
         // {
         //     var db = new projectzeroDBContext();
