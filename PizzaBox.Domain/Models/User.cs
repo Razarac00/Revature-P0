@@ -16,8 +16,6 @@ namespace PizzaBox.Domain.Models
         private AddressedOrder _latestOrder = new AddressedOrder();
         private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
         public int UserId { get; set; }
-        // public int AddressedOrderId { get; set; }
-        // public int LatestOrderId { get; set; }
         public Name Name { get => _name; set => _name = value; }
         public string UserName { get; set; }
         public string Password { get; set; }
