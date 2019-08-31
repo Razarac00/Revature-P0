@@ -1,15 +1,25 @@
 @model PizzaBox.Domain.Models.User
 
+<div class="text-left">
+    <h1 class="display-4">Create Your Account</h1>
+</div>
+<br>
 <form action="/user/createuser" method="post">
+    <p>
     <label for="username">UserName</label>
     <input type="text" id="username" name="username" placeholder="Your Username">
-    
+
     <label for="password">Password</label>
     <input type="text" id="password" name="password" placeholder="Your Password">
+    </p>
 
+    <p>
     <label asp-for="@Model.Name.First">FirstName</label>
-    <input type="text" id="@Model.Name.First" name="@Model.Name.First" placeholder="Your First Name">
+    <input type="text" id="firstname" name="firstname" placeholder="Your First Name">
 
     <label asp-for="@Model.Name.Last">LastName</label>
-    <input type="text" id="@Model.Name.Last" name="@Model.Name.Last" placeholder="Your Last Name">
+    <input type="text" id="lastname" name="lastname" placeholder="Your Last Name">
+    </p>
+    <br>
+    <button type="submit">Create Account</button>
 </form>
