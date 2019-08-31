@@ -10,15 +10,24 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Client.Controllers
 {
-    public class UserController
+    public class UserController : Controller
     {
         private ProjectZeroTwoDBContext _db = new ProjectZeroTwoDBContext();
 
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var user = _db.Users.Single(u => u.UserName == username && u.Password == password);
-            return View(user);
+            try
+            {
+                var user = _db.Users.Single(u => u.UserName == username && u.Password == password);
+                return RedirectToAction("UserHome");
+            }
+            catch (System.Exception)
+            {
+                
+                return RedirectToAction("Error");
+            }
+
         }
 
         [HttpPost]
@@ -32,10 +41,15 @@ namespace PizzaBox.Client.Controllers
             return View();
         }
 
-        public ViewResult UserHome(User user)
+        public IActionResult UserHome(User user)
         {
             return View(user);
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
