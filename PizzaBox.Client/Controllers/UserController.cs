@@ -27,7 +27,7 @@ namespace PizzaBox.Client.Controllers
             try
             {
                 var user = _db.Users.Single(u => u.UserName == username && u.Password == password);
-                return RedirectToAction("UserHome");
+                return RedirectToAction("UserHome",user);
             }
             catch (System.Exception)
             {
@@ -50,6 +50,8 @@ namespace PizzaBox.Client.Controllers
             {
                 _db.Users.Add(user);
                 _db.SaveChangesAsync();
+
+                return RedirectToAction("Login");
             }
             return View();
         }
