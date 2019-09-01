@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-// using PizzaBox.Data.Entities;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Recipes;
 
@@ -39,7 +38,7 @@ namespace PizzaBox.Domain.Models
             // {
             //     if (itemType == recipeType.Name)
             //     {
-            //         recipeType std = Activator.CreateInstance<recipeType>();
+            //         var std = Activator.CreateInstance<recipeType>();
                     
             //     }
             // }
@@ -83,7 +82,6 @@ namespace PizzaBox.Domain.Models
 
             if (LatestOrder is null ||  (CheckTimeLimitReached() && !CheckDailyStoreLimitReached()))
             {
-                //Save(CurrentOrder);
                 return CurrentOrder;
             }
 
@@ -119,20 +117,6 @@ namespace PizzaBox.Domain.Models
             }
             return result;
         }
-
-        // private void Save(AddressedOrder currentOrder)
-        // {
-        //     var db = new projectzeroDBContext();
-        //     db.UserOrders.Add(new Data.Entities.UserOrders
-        //     {
-        //         OrderDate = currentOrder.Date,
-        //         // AddressId = ,
-        //         Active = true
-        //     });
-        //     LatestOrder = CurrentOrder;
-        //     UserOrderHistory.Orders.Add(CurrentOrder);
-        //     //db.SaveChanges();
-        // }
 
         public void PrintOrderHistory()
         {
