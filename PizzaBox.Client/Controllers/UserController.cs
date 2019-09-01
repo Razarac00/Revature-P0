@@ -44,11 +44,13 @@ namespace PizzaBox.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateUser(User user)
+        public IActionResult CreateUser(User user, Name name)
         {
+            var finalUser = user;
+            finalUser.Name = name;
             if (ModelState.IsValid)
             {
-                _db.Users.Add(user);
+                _db.Users.Add(finalUser);
                 _db.SaveChangesAsync();
 
                 return RedirectToAction("Login");

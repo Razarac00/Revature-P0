@@ -6,19 +6,19 @@
 <br>
 <form action="/user/createuser" method="post">
     <p>
-    <label for="username">UserName</label>
+    <label for="Model.username">UserName</label>
     <input type="text" id="username" name="username" placeholder="Your Username">
 
-    <label for="password">Password</label>
+    <label for="Model.password">Password</label>
     <input type="text" id="password" name="password" placeholder="Your Password">
     </p>
 
     <p>
-    <label asp-for="@Model.Name.First">FirstName</label>
-    <input type="text" id="firstname" name="firstname" placeholder="Your First Name">
+    <label for="Name.First">FirstName</label>
+    <input type="text" id="Name.First" name="Name.First" placeholder="Your First Name">
 
-    <label asp-for="@Model.Name.Last">LastName</label>
-    <input type="text" id="lastname" name="lastname" placeholder="Your Last Name">
+    <label for="Name.Last">LastName</label>
+    <input type="text" id="Name.Last" name="Name.Last" placeholder="Your Last Name">
     </p>
     <br>
     <button type="submit">Create Account</button>
