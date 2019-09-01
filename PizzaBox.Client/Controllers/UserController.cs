@@ -56,7 +56,7 @@ namespace PizzaBox.Client.Controllers
             {
                 var finalUser = user;
                 finalUser.Name = name;
-                
+
                 _db.Users.Add(finalUser);
                 _db.SaveChangesAsync();
 
@@ -69,6 +69,11 @@ namespace PizzaBox.Client.Controllers
         {
             var loadedUser = _db.Users.Include("Name").Single(u => u.UserId == user.UserId);
             return View(loadedUser);
+        }
+
+        public IActionResult Logout()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
