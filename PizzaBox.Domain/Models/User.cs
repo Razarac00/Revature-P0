@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using PizzaBox.Domain.Interfaces;
@@ -14,9 +15,16 @@ namespace PizzaBox.Domain.Models
         private int _defaultStoreTImeLimit = 24;
         private AddressedOrder _latestOrder = new AddressedOrder();
         private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
+
+
         public int UserId { get; set; }
         public Name Name { get => _name; set => _name = value; }
+
+        [Required(ErrorMessage="Username required")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessage="Password required")]
+        // [DataType(DataType.Password)]
         public string Password { get; set; }
         public OrderHistory UserOrderHistory { get; set; }
         public AddressedOrder LatestOrder { get => _latestOrder; set => _latestOrder = value; }

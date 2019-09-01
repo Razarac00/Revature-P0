@@ -2,6 +2,9 @@
 
 <div class="text-left">
     <h1 class="display-4">Welcome @Model.Name.First!</h1>
+</div>
+<div class="text-right">
     <h2>Logged in as: @Model.UserName</h2>
 </div>
 <br>
+<input type="button" value="Sign Out" onclick="@("window.location.href='" + @Url.Action("logout", "user") + "'");" />

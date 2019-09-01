@@ -28,6 +28,10 @@ namespace PizzaBox.Client.Controllers
             try
             {
                 var user = _db.Users.Single(u => u.UserName == username && u.Password == password);
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
                 return RedirectToAction("UserHome",user);
             }
             catch (System.Exception)
@@ -45,12 +49,14 @@ namespace PizzaBox.Client.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateUser(User user, Name name)
         {
-            var finalUser = user;
-            finalUser.Name = name;
             if (ModelState.IsValid)
             {
+                var finalUser = user;
+                finalUser.Name = name;
+                
                 _db.Users.Add(finalUser);
                 _db.SaveChangesAsync();
 

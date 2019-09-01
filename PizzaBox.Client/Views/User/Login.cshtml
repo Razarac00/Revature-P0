@@ -5,11 +5,12 @@
 </div>
 <br>
 <form action="/user/login" method="post">
+    @Html.ValidationMessageFor(m => m.UserName)
     <label for="username">UserName</label>
-    <input type="text" id="username" name="username" placeholder="Your Username">
-    
+    <input type="text" id="username" asp-for="@Model.UserName" placeholder="Your Username">
+    @Html.ValidationMessageFor(m => m.Password)
     <label for="password">Password</label>
-    <input type="text" id="password" name="password" placeholder="Your Password">
+    <input type="text" id="password" asp-for="@Model.Password" placeholder="Your Password">
     <br>
     <button type="submit">Login</button>
 </form>

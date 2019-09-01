@@ -6,20 +6,24 @@
 <br>
 <form action="/user/createuser" method="post">
     <p>
-    <label for="Model.username">UserName</label>
-    <input type="text" id="username" name="username" placeholder="Your Username">
-
-    <label for="Model.password">Password</label>
-    <input type="text" id="password" name="password" placeholder="Your Password">
+        @Html.ValidationMessageFor(m => m.UserName)
+        <label for="Model.username">UserName</label>
+        <input type="text" id="username" asp-for="@Model.UserName" placeholder="Your Username">
+        @Html.ValidationMessageFor(m => m.Password)
+        <label for="Model.password">Password</label>
+        <input type="text" id="password" asp-for="@Model.Password" placeholder="Your Password">
     </p>
 
     <p>
-    <label for="Name.First">FirstName</label>
-    <input type="text" id="Name.First" name="Name.First" placeholder="Your First Name">
-
-    <label for="Name.Last">LastName</label>
-    <input type="text" id="Name.Last" name="Name.Last" placeholder="Your Last Name">
+        @Html.ValidationMessageFor(m => m.Name.First)
+        <label for="Name.First">FirstName</label>
+        <input type="text" id="Name.First" asp-for="@Model.Name.First" placeholder="Your First Name">
+        @Html.ValidationMessageFor(m => m.Name.Last)
+        <label for="Name.Last">LastName</label>
+        <input type="text" id="Name.Last" asp-for="@Model.Name.Last" placeholder="Your Last Name">
     </p>
     <br>
     <button type="submit">Create Account</button>
+
+    @Html.AntiForgeryToken()
 </form>
