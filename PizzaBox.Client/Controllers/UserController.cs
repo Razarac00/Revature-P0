@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PizzaBox.Client.Models;
 using PizzaBox.Data;
 using PizzaBox.Domain.Models;
@@ -60,7 +61,8 @@ namespace PizzaBox.Client.Controllers
 
         public IActionResult UserHome(User user)
         {
-            return View(user);
+            var loadedUser = _db.Users.Include("Name").Single(u => u.UserId == user.UserId);
+            return View(loadedUser);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
