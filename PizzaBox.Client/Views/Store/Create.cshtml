@@ -9,4 +9,7 @@
     @Html.ValidationMessageFor(m => m.Location.City)
     <label for="city">City</label>
     <input type="text" id="city" asp-for="@Model.Location.City" placeholder="TX">
+
+    <button type="submit">Submit</button>
+    @Html.AntiForgeryToken()
 </form>
