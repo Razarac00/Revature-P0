@@ -1,2 +1,8 @@
 @model PizzaBox.Domain.Models.Store
 
+<ul>
+    @foreach (var item in @Model.ViewOrders())
+    {
+        <li>@item.AddressedOrder</li>
+    }
+</ul>

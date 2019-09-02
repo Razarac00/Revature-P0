@@ -76,6 +76,12 @@ namespace PizzaBox.Client.Controllers
             return View();
         }
 
+        public IActionResult Locations()
+        {
+            var storeAddresses = _db.Addresses.ToList();
+            return View(storeAddresses);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
