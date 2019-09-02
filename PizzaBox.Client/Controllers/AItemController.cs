@@ -101,7 +101,6 @@ namespace PizzaBox.Client.Controllers
                 _db.SaveChanges();
             }
 
-
             return RedirectToAction("All");
         }
         

@@ -3,6 +3,8 @@
 <ul>
   @foreach (var item in Model)
   {
-    <li>@item.Name</li>
+    <li>@item.Name | @item.GetType().ToString()</li>
   }
 </ul>
+
+<input type="button" value="Create an Item" onclick="@("window.location.href='" + @Url.Action("create", "aitem") + "'");" />
