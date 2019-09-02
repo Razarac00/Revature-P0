@@ -1,0 +1,12 @@
+@model PizzaBox.Domain.Models.Store
+
+<form action="/store/create" method="post">
+
+    @Html.ValidationMessageFor(m => m.Location.AddressLine)
+    <label for="addressLine1">Address Line 1</label>
+    <input type="text" id="addressLine1" asp-for="@Model.Location.AddressLine" placeholder="## Street">
+
+    @Html.ValidationMessageFor(m => m.Location.City)
+    <label for="city">City</label>
+    <input type="text" id="city" asp-for="@Model.Location.City" placeholder="TX">
+</form>
