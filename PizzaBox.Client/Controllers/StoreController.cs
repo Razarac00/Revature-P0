@@ -18,9 +18,35 @@ namespace PizzaBox.Client.Controllers
         [HttpGet("{StoreId}")]
         public IActionResult ViewOrders(int StoreId)
         {
-            var currentStore = _db.Stores.Include("OrderHistories");
+            var currentStore = _db.Stores.Include(s => s.ViewOrders()).ToList();
             // var storeOrderHistory = ;
             return View(currentStore);
+        }
+
+        [HttpGet]
+        public ViewResult Read()
+        {
+            var stores = _db.Stores.Include(s => s.Location).ToList();
+            return View(stores);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Store store, Address address)
+        {
+            if (ModelState.IsValid)
+            {
+                Store finalStore = new Store();
+                finalStore = store;
+                finalStore.Location = address;
+
+                _db.Stores.Add(finalStore);
+                _db.SaveChanges();
+
+                return RedirectToAction("Read");
+            }
+            
+            return View();
         }
     }
 }

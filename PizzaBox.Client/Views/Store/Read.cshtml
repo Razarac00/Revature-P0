@@ -1,0 +1,9 @@
+@model List<PizzaBox.Domain.Models.Store>
+
+@foreach (var store in @Model)
+{
+    <tr>
+        <td>@store.Location</td>
+        <td>@store.StoreId</td>
+    </tr>
+}
