@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using PizzaBox.Domain.Interfaces;
 
 namespace PizzaBox.Domain.Abstracts
@@ -14,6 +15,8 @@ namespace PizzaBox.Domain.Abstracts
             get => _defaultPrice; 
             set => _defaultPrice = SetupPrice(value); 
         }
+        
+        [Required(ErrorMessage="Item name is required")]
         public virtual string Name 
         { 
             get => _defaultName; 

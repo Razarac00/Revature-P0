@@ -1,13 +1,16 @@
+@model PizzaBox.Domain.Abstracts.AItem
+
 <form action="/aitem/create" method="post">
 
+    @Html.ValidationMessageFor(m => m.Name)
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Item Name">
+    <input type="text" id="name" asp-for="@Model.Name" placeholder="Item Name">
 
     <label for="price">Price</label>
     <input type="number" min="0.01" step="any" id="price" name="price" placeholder="Item Price">
 
     <fieldset name="Radiobutton">
-        <label><input type="radio" name="discriminator" value="topping">Topping</label>
+        <label><input type="radio" name="discriminator" value="topping" required>Topping</label>
         <label><input type="radio" name="discriminator" value="crust">Crust</label>
         <label><input type="radio" name="discriminator" value="size">Size</label>
     </fieldset>
