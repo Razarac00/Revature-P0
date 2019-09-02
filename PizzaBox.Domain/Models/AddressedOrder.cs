@@ -16,6 +16,7 @@ namespace PizzaBox.Domain.Models
         public DateTime Date { get => _date; set => _date = value; }
         public User OrderUser { get => _orderUser; set => _orderUser = value; }
         public decimal FinalPrice { get; set; }
+        public OrderHistory OrderHistory { get; set; }
 
         public override string ToString()
         {

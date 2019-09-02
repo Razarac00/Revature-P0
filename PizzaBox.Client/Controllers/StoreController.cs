@@ -30,22 +30,26 @@ namespace PizzaBox.Client.Controllers
             return View(stores);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Store store, Address address)
+        public IActionResult Create(Store store)
         {
             if (ModelState.IsValid)
             {
-                Store finalStore = new Store();
-                finalStore = store;
-                finalStore.Location = address;
+                Store finalStore = store;
 
                 _db.Stores.Add(finalStore);
                 _db.SaveChanges();
 
                 return RedirectToAction("Read");
             }
-            
+
             return View();
         }
     }

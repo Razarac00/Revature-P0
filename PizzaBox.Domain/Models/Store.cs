@@ -11,9 +11,9 @@ namespace PizzaBox.Domain.Models
         private int _defaultRecentUserTimeLimit = 24;
         private Address _location = new Address();
         private OrderHistory _storeOrderHistory = new OrderHistory();
-        private List<InventoryItem> _inventory = new Inventory().Items;
+        private Inventory _inventory = new Inventory();
         public Address Location { get => _location; set => _location = value; }
-        public List<InventoryItem> Inventory { get => _inventory; set => _inventory = value; }
+        public Inventory Inventory { get => _inventory; set => _inventory = value; }
         public OrderHistory StoreOrderHistory { get => _storeOrderHistory; set => _storeOrderHistory = value; }
 
         public List<User> ViewUsers()

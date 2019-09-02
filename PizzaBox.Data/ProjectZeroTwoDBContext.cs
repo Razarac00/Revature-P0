@@ -31,6 +31,27 @@ namespace PizzaBox.Data
             builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             builder.Entity<User>().HasOne(u => u.Name);
             
+            builder.Entity<AddressedOrder>().Property(a => a.Address).IsRequired();
+            builder.Entity<AddressedOrder>()
+                   .HasOne(a => a.OrderHistory)
+                   .WithMany(o => o.Orders);
+
+            builder.Entity<Address>()
+                   .HasOne(a => a.Store)
+                   .WithOne(s => s.Location);
+            builder.Entity<Address>().Property(a => a.AddressLine).IsRequired();
+            builder.Entity<Address>().Property(a => a.City).IsRequired();
+
+            builder.Entity<AItem>().HasIndex(i => i.Name).IsUnique();
+
+            builder.Entity<InventoryItem>().HasMany(i => i.Inventories);
+            
+            builder.Entity<Inventory>().HasMany(i => i.Items);
+            builder.Entity<Inventory>()
+                   .HasOne(i => i.Store)
+                   .WithOne(s => s.Inventory);
+
+            builder.Entity<Pizza>().HasMany(p => p.Toppings);
         }
     }    
 }

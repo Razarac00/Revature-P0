@@ -59,12 +59,12 @@ namespace PizzaBox.Testing.UnitTests
         }
 
         [Fact]
-        public void InventoryIsDictionary()
+        public void InventoryIsList()
         {
         //Given
         var store = new Store();
         //When
-        List<InventoryItem> actual = store.Inventory;
+        List<InventoryItem> actual = store.Inventory.Items;
         
         //Then
         Assert.IsType<List<InventoryItem>>(actual);

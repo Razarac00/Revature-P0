@@ -7,3 +7,5 @@
         <td>@store.StoreId</td>
     </tr>
 }
+
+<input type="button" value="Create a Store" onclick="@("window.location.href='" + @Url.Action("create", "store") + "'");" />
