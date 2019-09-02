@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
@@ -14,6 +15,7 @@ namespace PizzaBox.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<AItem> AItems { get; set; }
         public DbSet<Topping> Toppings { get; set; }
         public DbSet<Crust> Crusts { get; set; }
         public DbSet<Size> Sizes { get; set; }

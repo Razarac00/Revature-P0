@@ -17,72 +17,92 @@ namespace PizzaBox.Client.Controllers
         private ProjectZeroTwoDBContext _db = new ProjectZeroTwoDBContext();
 
         [HttpGet]
-        public ViewResult Read(List<AItem> itemList)
+        public ActionResult Read()
         {
-            return View(itemList);
+            var discriminator = (string) TempData["dis"];
+            var result = new List<AItem>();
+
+            if (discriminator == "all")
+            {
+                result = _db.AItems.ToList();
+            }
+            else if (discriminator == "toppings")
+            {
+                result = _db.Toppings.Cast<AItem>().ToList();
+            }
+            else if (discriminator == "crusts")
+            {
+                result = _db.Crusts.Cast<AItem>().ToList();
+            }
+            else if (discriminator == "sizes")
+            {
+                result = _db.Sizes.Cast<AItem>().ToList();
+            }
+
+            return View(result);
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var allItems = _db.Toppings.Include("Crust").Include("Size").ToList();
-            return RedirectToAction("Read", allItems);
+            TempData["dis"] = "all";
+            return RedirectToAction("Read");
         } 
 
         [HttpGet]
         public IActionResult Toppings()
         {
-            var allToppings = _db.Toppings.ToList();
-            return RedirectToAction("Read", allToppings);
+            TempData["dis"] = "toppings";
+            return RedirectToAction("Read");
         }
 
         [HttpGet]
         public IActionResult Crusts()
         {
-            var allCrusts = _db.Crusts.ToList();
-            return RedirectToAction("Read", allCrusts);
+            TempData["dis"] = "crusts";
+            return RedirectToAction("Read");
         } 
 
         [HttpGet]
         public IActionResult Sizes()
         {
-            var allSizes = _db.Sizes.ToList();
-            return RedirectToAction("Read", allSizes);
+            TempData["dis"] = "sizes";
+            return RedirectToAction("Read");
         }  
 
         [HttpGet]
         public IActionResult Create()
         {
-        return View();
+            return View();
         } 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(AItem item, string discriminator)
+        public IActionResult Create(string name, decimal price, string discriminator)
         {
         if (ModelState.IsValid)
         {
             if (discriminator == "crust")
             {
-                var crust = new Crust(item.Name, item.Price);
+                var crust = new Crust(name, price);
                 _db.Crusts.Add(crust);
                 _db.SaveChanges();
             }
             else if (discriminator == "size")
             {
-                var size = new Size(item.Name, item.Price);
+                var size = new Size(name, price);
                 _db.Sizes.Add(size);
                 _db.SaveChanges();
             }
             else if (discriminator == "topping")
             {
-                var topping = new Topping(item.Name, item.Price);
+                var topping = new Topping(name, price);
                 _db.Toppings.Add(topping);
                 _db.SaveChanges();
             }
 
 
-            return RedirectToAction("Read");
+            return RedirectToAction("All");
         }
         
         return View();
