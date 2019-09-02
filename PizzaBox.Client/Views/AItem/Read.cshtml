@@ -1,0 +1,8 @@
+@model List<PizzaBox.Domain.Abstracts.AItem>
+
+<ul>
+  @foreach (var item in Model)
+  {
+    <li>@item.Name</li>
+  }
+</ul>
