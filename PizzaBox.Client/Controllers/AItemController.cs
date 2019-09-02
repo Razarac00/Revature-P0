@@ -58,12 +58,29 @@ namespace PizzaBox.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Crust crust)
+        public IActionResult Create(AItem item, string discriminator)
         {
         if (ModelState.IsValid)
         {
-            _db.Crusts.Add(crust);
-            _db.SaveChanges();
+            if (discriminator == "crust")
+            {
+                var crust = new Crust(item.Name, item.Price);
+                _db.Crusts.Add(crust);
+                _db.SaveChanges();
+            }
+            else if (discriminator == "size")
+            {
+                var size = new Size(item.Name, item.Price);
+                _db.Sizes.Add(size);
+                _db.SaveChanges();
+            }
+            else if (discriminator == "topping")
+            {
+                var topping = new Topping(item.Name, item.Price);
+                _db.Toppings.Add(topping);
+                _db.SaveChanges();
+            }
+
 
             return RedirectToAction("Read");
         }

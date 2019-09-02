@@ -20,5 +20,8 @@ namespace PizzaBox.Domain.Models
         {
         }
 
+        public Crust(string name, decimal price) : base(name, price)
+        {}
+
     }
 }
