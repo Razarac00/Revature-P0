@@ -68,6 +68,9 @@ namespace PizzaBox.Client.Controllers
         public IActionResult UserHome(User user)
         {
             var loadedUser = _db.Users.Include("Name").Single(u => u.UserId == user.UserId);
+            TempData["UserID"] = loadedUser.UserId;
+            TempData["UserName"] = loadedUser.UserName;
+            TempData.Keep();
             return View(loadedUser);
         }
 

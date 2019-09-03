@@ -1,5 +1,14 @@
 @model List<PizzaBox.Domain.Models.Address>
 
+@{
+    var userId = TempData["UserID"];
+    var userName = TempData["UserName"];
+}
+
+<div class="text-right">
+    <small>Logged in as: @userName</small>
+</div>
+
 @foreach (var address in @Model)
 {
     <tr>
@@ -10,7 +19,7 @@
             @address.City
         </td>
         <td>
-            @Html.ActionLink("Order", "CreateOrder", "Order", new { AddressId=address.AddressId})
+            @Html.ActionLink("Order", "CreateOrder", "Order", new { AddressId=address.AddressId, UserId=userId})
         </td>
     </tr>
     <br>
