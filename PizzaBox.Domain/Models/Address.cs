@@ -12,7 +12,6 @@ namespace PizzaBox.Domain.Models
 
         [Required(ErrorMessage="City Required")]
         public string City { get; set; }
-        public Store Store { get; set; }
 
         public Address()
         {

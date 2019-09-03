@@ -8,8 +8,8 @@ namespace PizzaBox.Data
     public class ProjectZeroTwoDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<OrderHistory> StoreOrderHistories { get; set; }
-        public DbSet<OrderHistory> UserOrderHistories { get; set; }
+        // public DbSet<OrderHistory> StoreOrderHistories { get; set; }
+        // public DbSet<OrderHistory> UserOrderHistories { get; set; }
         public DbSet<AddressedOrder> AddressedOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -32,14 +32,14 @@ namespace PizzaBox.Data
             builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             builder.Entity<User>().HasOne(u => u.Name);
             
-            builder.Entity<AddressedOrder>().Property(a => a.Address).IsRequired();
+            builder.Entity<AddressedOrder>().HasOne(a => a.Address);
             builder.Entity<AddressedOrder>()
                    .HasOne(a => a.OrderHistory)
                    .WithMany(o => o.Orders);
 
-            builder.Entity<Address>()
-                   .HasOne(a => a.Store)
-                   .WithOne(s => s.Location);
+            // builder.Entity<Address>()
+            //        .HasOne(a => a.Store)
+            //        .WithOne(s => s.Location);
             builder.Entity<Address>().Property(a => a.AddressLine).IsRequired();
             builder.Entity<Address>().Property(a => a.City).IsRequired();
 
@@ -56,9 +56,9 @@ namespace PizzaBox.Data
                    .HasOne(o => o.User)
                    .WithOne(u => u.UserOrderHistory);
 
-            builder.Entity<OrderHistory>()
-                   .HasOne(o => o.Store)
-                   .WithOne(s => s.StoreOrderHistory);
+            // builder.Entity<OrderHistory>()
+            //        .HasOne(o => o.Store)
+            //        .WithOne(s => s.StoreOrderHistory);
 
             builder.Entity<Order>()
                    .HasOne(o => o.AddressedOrder)
@@ -67,8 +67,8 @@ namespace PizzaBox.Data
             builder.Entity<Pizza>().HasMany(p => p.Toppings);
             builder.Entity<Pizza>().HasOne(p => p.Crust);
             builder.Entity<Pizza>().HasOne(p => p.Size);
-            builder.Entity<Pizza>().Property(p => p.Size).IsRequired();
-            builder.Entity<Pizza>().Property(p => p.Crust).IsRequired();
+
+            builder.Entity<Store>().HasOne(s => s.Location);
         }
     }    
 }

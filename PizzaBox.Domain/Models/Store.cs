@@ -10,18 +10,18 @@ namespace PizzaBox.Domain.Models
         public int AddressId { get; set; }
         private int _defaultRecentUserTimeLimit = 24;
         private Address _location = new Address();
-        private OrderHistory _storeOrderHistory = new OrderHistory();
+        private List<AddressedOrder> _storeOrderHistory = new List<AddressedOrder>();
         private Inventory _inventory = new Inventory();
         public Address Location { get => _location; set => _location = value; }
         public Inventory Inventory { get => _inventory; set => _inventory = value; }
-        public OrderHistory StoreOrderHistory { get => _storeOrderHistory; set => _storeOrderHistory = value; }
+        public List<AddressedOrder> StoreOrderHistory { get => _storeOrderHistory; set => _storeOrderHistory = value; }
 
         public List<User> ViewUsers()
         {
             DateTime present = DateTime.Now;
             List<User> recentUsers = new List<User>();
 
-            foreach (AddressedOrder aOrder in StoreOrderHistory.Orders)
+            foreach (AddressedOrder aOrder in StoreOrderHistory)
             {
                 if (!CheckTimeLimitReached(aOrder, present))
                 {
@@ -34,7 +34,7 @@ namespace PizzaBox.Domain.Models
         public List<Order> ViewOrders()
         {
             var result = new List<Order>();
-            foreach (AddressedOrder aOrder in StoreOrderHistory.Orders)
+            foreach (AddressedOrder aOrder in StoreOrderHistory)
             {
                 result.Add(aOrder.Order);
             }
@@ -44,7 +44,7 @@ namespace PizzaBox.Domain.Models
         public List<Sale> ViewSales()
         {
             var result = new List<Sale>();
-            foreach (AddressedOrder aOrder in StoreOrderHistory.Orders)
+            foreach (AddressedOrder aOrder in StoreOrderHistory)
             {
                 var sale = new Sale(aOrder.Order, aOrder.Date, aOrder.FinalPrice);
                 result.Add(sale);

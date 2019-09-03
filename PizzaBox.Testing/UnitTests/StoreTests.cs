@@ -25,7 +25,7 @@ namespace PizzaBox.Testing.UnitTests
         store.Location = address1;
         var order1 = new Order();
         var addressedOrder = new AddressedOrder(address1, order1);
-        store.StoreOrderHistory.Orders.Add(addressedOrder);
+        store.StoreOrderHistory.Add(addressedOrder);
 
         //When
         var expected = new List<Order> {order1};
@@ -49,7 +49,7 @@ namespace PizzaBox.Testing.UnitTests
         order1.AddToOrderItems(pizzaList);
 
         var addressedOrder = new AddressedOrder(address1, order1);
-        store.StoreOrderHistory.Orders.Add(addressedOrder);
+        store.StoreOrderHistory.Add(addressedOrder);
         //When
         var expectedTotal = pizza1.Price + pizza2.Price;
         var actual = store.ViewSales();
@@ -83,7 +83,7 @@ namespace PizzaBox.Testing.UnitTests
         orderUser.Name.First = "test";
         orderUser.Name.Last = "user";
         addressedOrder.OrderUser = orderUser;
-        store.StoreOrderHistory.Orders.Add(addressedOrder);
+        store.StoreOrderHistory.Add(addressedOrder);
 
         //When
         var actual = store.ViewUsers();

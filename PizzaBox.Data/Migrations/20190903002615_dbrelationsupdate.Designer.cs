@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Data;
 
 namespace PizzaBox.Data.Migrations
 {
     [DbContext(typeof(ProjectZeroTwoDBContext))]
-    partial class ProjectZeroTwoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190903002615_dbrelationsupdate")]
+    partial class dbrelationsupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,8 +78,6 @@ namespace PizzaBox.Data.Migrations
 
                     b.Property<int?>("OrderHistoryId");
 
-                    b.Property<int?>("StoreId");
-
                     b.Property<int>("UserId");
 
                     b.HasKey("AddressedOrderId");
@@ -85,8 +85,6 @@ namespace PizzaBox.Data.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasIndex("OrderHistoryId");
-
-                    b.HasIndex("StoreId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -185,7 +183,8 @@ namespace PizzaBox.Data.Migrations
 
                     b.HasKey("OrderHistoryId");
 
-                    b.HasIndex("StoreId");
+                    b.HasIndex("StoreId")
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -298,10 +297,6 @@ namespace PizzaBox.Data.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("OrderHistoryId");
 
-                    b.HasOne("PizzaBox.Domain.Models.Store")
-                        .WithMany("StoreOrderHistory")
-                        .HasForeignKey("StoreId");
-
                     b.HasOne("PizzaBox.Domain.Models.User", "OrderUser")
                         .WithOne("LatestOrder")
                         .HasForeignKey("PizzaBox.Domain.Models.AddressedOrder", "UserId")
@@ -350,8 +345,8 @@ namespace PizzaBox.Data.Migrations
             modelBuilder.Entity("PizzaBox.Domain.Models.OrderHistory", b =>
                 {
                     b.HasOne("PizzaBox.Domain.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId")
+                        .WithOne("StoreOrderHistory")
+                        .HasForeignKey("PizzaBox.Domain.Models.OrderHistory", "StoreId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("PizzaBox.Domain.Models.User", "User")
