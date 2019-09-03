@@ -1,0 +1,27 @@
+@model PizzaBox.Domain.Models.AddressedOrder
+
+@{
+    var addressId = TempData["AddressId"];
+    var userId = TempData["UserId"];
+}
+
+<div class="text-right">
+    <small>Logged in as: @userId</small>
+</div>
+
+<form action="/order/createorder" method="post">
+
+    <input type="button" value="Build Your Pizza" onclick="@("window.location.href='" + @Url.Action("create", "pizza") + "'");" />
+
+    <!-- <label for="price">Price</label>
+    <input type="number" min="0.01" step="any" id="price" name="price" placeholder="Item Price"> -->
+
+    <fieldset name="Radiobutton">
+        <label><input type="radio" name="discriminator" value="topping" required>Topping</label>
+        <label><input type="radio" name="discriminator" value="crust">Crust</label>
+        <label><input type="radio" name="discriminator" value="size">Size</label>
+    </fieldset>
+
+    <button type="submit">Place Order</button>
+    @Html.AntiForgeryToken()
+</form>

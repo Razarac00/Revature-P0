@@ -19,8 +19,10 @@
             @address.City
         </td>
         <td>
-            @Html.ActionLink("Order", "CreateOrder", "Order", new { AddressId=address.AddressId, UserId=userId})
+            <input type="button" value="Place an Order" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" />
         </td>
     </tr>
     <br>
 }
+
+<input type="button" value="Sign Out" onclick="@("window.location.href='" + @Url.Action("logout", "user") + "'");" />

@@ -74,15 +74,31 @@ namespace PizzaBox.Client.Controllers
             return View(loadedUser);
         }
 
+        [HttpGet]
         public IActionResult Logout()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Locations()
         {
             var storeAddresses = _db.Addresses.ToList();
             return View(storeAddresses);
+        }
+
+        [HttpGet]
+        public IActionResult MakeOrder()
+        {
+            // var u = TempData["UserID"];
+            return RedirectToAction("createorder", "order");
+        }
+        public IActionResult MakeOrder(Address address)
+        {
+            var loadedUser = _db.Users.Single(u => u.UserId == (int) TempData["UserID"]);
+            var chosenAddress = _db.Addresses.Single(a => a.AddressId == address.AddressId);
+            loadedUser.StartOrder(chosenAddress);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
