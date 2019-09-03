@@ -8,7 +8,8 @@ namespace PizzaBox.Data
     public class ProjectZeroTwoDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<OrderHistory> OrderHistories { get; set; }
+        public DbSet<OrderHistory> StoreOrderHistories { get; set; }
+        public DbSet<OrderHistory> UserOrderHistories { get; set; }
         public DbSet<AddressedOrder> AddressedOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -45,13 +46,29 @@ namespace PizzaBox.Data
             builder.Entity<AItem>().HasIndex(i => i.Name).IsUnique();
 
             builder.Entity<InventoryItem>().HasMany(i => i.Inventories);
-            
+
             builder.Entity<Inventory>().HasMany(i => i.Items);
             builder.Entity<Inventory>()
                    .HasOne(i => i.Store)
                    .WithOne(s => s.Inventory);
 
+            builder.Entity<OrderHistory>()
+                   .HasOne(o => o.User)
+                   .WithOne(u => u.UserOrderHistory);
+
+            builder.Entity<OrderHistory>()
+                   .HasOne(o => o.Store)
+                   .WithOne(s => s.StoreOrderHistory);
+
+            builder.Entity<Order>()
+                   .HasOne(o => o.AddressedOrder)
+                   .WithOne(a => a.Order);
+
             builder.Entity<Pizza>().HasMany(p => p.Toppings);
+            builder.Entity<Pizza>().HasOne(p => p.Crust);
+            builder.Entity<Pizza>().HasOne(p => p.Size);
+            builder.Entity<Pizza>().Property(p => p.Size).IsRequired();
+            builder.Entity<Pizza>().Property(p => p.Crust).IsRequired();
         }
     }    
 }
