@@ -22,29 +22,40 @@ namespace PizzaBox.Client.Controllers
             var toppings = _db.Toppings.ToList();
             var crusts = _db.Crusts.ToList();
             var sizes = _db.Sizes.ToList();
+
             ViewBag.StoreAddresses = storeAddresses;
             ViewBag.Toppings = toppings;
             ViewBag.Crusts = crusts;
             ViewBag.Sizes = sizes;
+
+            var userId = (int) TempData["UserID"];
+            TempData["UserID"] = userId;
+            TempData.Keep();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateOrder(AddressedOrder addressedOrder, int addressId)
+        public IActionResult CreateOrder(string addressLine1, List<Topping> toppings, Crust crusts, Size sizes)
         {
+            var userId = (int) TempData["UserID"];
+            TempData["UserID"] = userId;
+            TempData.Keep();
+
             if (ModelState.IsValid)
             {
-                var userId = (int) TempData["UserID"];
-                var currentAddress = _db.Addresses.Single(a => a.AddressId == addressId);
+                
+                var currentAddress = _db.Addresses.Single(a => a.AddressLine == addressLine1);
                 var currentUser = _db.Users.Single(u => u.UserId == userId);
-                AddressedOrder finalOrder = new AddressedOrder();
-                finalOrder.Address = currentAddress;
-                // finalOrder.UserId = userId;
-                finalOrder.OrderUser = currentUser;
+                
+                AddressedOrder finalOrder = currentUser.StartOrder(currentAddress);
+                currentUser.AddToOrder("Standard", toppings, crusts, sizes);
+                currentUser.FinishOrder();
 
                 _db.AddressedOrders.Add(finalOrder);
                 _db.SaveChanges();
+
+                return RedirectToAction("userhome", "user", currentUser);
             }
             return View();
         }

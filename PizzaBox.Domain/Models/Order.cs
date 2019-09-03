@@ -15,6 +15,7 @@ namespace PizzaBox.Domain.Models
         private int _defaultPizzaCountLimit = 100;
         private List<ISellable> _orderItems = new List<ISellable>();
         private List<ISellable> OrderItems { get => _orderItems; set => _orderItems = value; }
+        
         public void AddToOrderItems(ISellable item)
         {
             OrderItems.Add(item);

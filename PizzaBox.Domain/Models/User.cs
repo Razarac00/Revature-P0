@@ -26,7 +26,7 @@ namespace PizzaBox.Domain.Models
         [Required(ErrorMessage="Password required")]
         // [DataType(DataType.Password)]
         public string Password { get; set; }
-        public OrderHistory UserOrderHistory { get; set; }
+        public List<AddressedOrder> UserOrderHistory { get; set; }
         public AddressedOrder LatestOrder { get => _latestOrder; set => _latestOrder = value; }
         private AddressedOrder CurrentOrder { get; set; }
         public Pizza CustomPizza { get; set; }
@@ -41,15 +41,6 @@ namespace PizzaBox.Domain.Models
 
         public void AddToOrder(string itemType, List<Topping> toppings, Crust crust, Size size)
         {
-            // var recipeList = getRecipes();
-            // foreach (var recipeType in recipeList)
-            // {
-            //     if (itemType == recipeType.Name)
-            //     {
-            //         var std = Activator.CreateInstance<recipeType>();
-                    
-            //     }
-            // }
             Pizza pizza = null;
             if (itemType == "Standard")
             {
@@ -134,7 +125,7 @@ namespace PizzaBox.Domain.Models
             }
             else
             {
-                foreach (var addressedOrder in UserOrderHistory.Orders)
+                foreach (var addressedOrder in UserOrderHistory)
                 {
                     Console.WriteLine(addressedOrder.ToString());
                 }

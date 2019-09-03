@@ -10,5 +10,6 @@ namespace PizzaBox.Domain.Models
         public int SizeId { get; set; }
         public Size(string name, decimal price) : base(name, price) {}
         public Size(string name) : base(name) {}
+        public Size() : base() {}
     }
 }

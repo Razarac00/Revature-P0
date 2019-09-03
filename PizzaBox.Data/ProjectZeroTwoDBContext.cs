@@ -31,6 +31,7 @@ namespace PizzaBox.Data
             builder.Entity<User>().HasKey(u => u.UserId);
             builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             builder.Entity<User>().HasOne(u => u.Name);
+            builder.Entity<User>().HasMany(u => u.UserOrderHistory).WithOne(o => o.OrderUser);
             
             builder.Entity<AddressedOrder>().HasOne(a => a.Address);
             builder.Entity<AddressedOrder>()
@@ -52,9 +53,9 @@ namespace PizzaBox.Data
                    .HasOne(i => i.Store)
                    .WithOne(s => s.Inventory);
 
-            builder.Entity<OrderHistory>()
-                   .HasOne(o => o.User)
-                   .WithOne(u => u.UserOrderHistory);
+            // builder.Entity<OrderHistory>()
+            //        .HasOne(o => o.User)
+            //        .WithOne(u => u.UserOrderHistory);
 
             // builder.Entity<OrderHistory>()
             //        .HasOne(o => o.Store)
