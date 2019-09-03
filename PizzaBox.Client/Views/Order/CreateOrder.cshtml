@@ -15,16 +15,51 @@
     <!-- <input type="button" value="Build Your Pizza" onclick="@("window.location.href='" + @Url.Action("create", "pizza") + "'");" /> -->
     <label for="username">Username</label>
     <input type="text" id="username" name="username" placeholder="Retype Username">
+    <br>
+    <br>
+    <b for="address">Addresses:</b>
+    <ul>
+        @foreach (var address in ViewBag.StoreAddresses)
+        {
+            <li>@address</li>
+        }
+    </ul>
 
     <label for="addressline1">Address</label>
     <input type="text" id="addressline1" name="addressline1" placeholder="Retype Username">
-
-
-    <fieldset name="Radiobutton">
-        <label><input type="radio" name="discriminator" value="topping" required>Topping</label>
-        <label><input type="radio" name="discriminator" value="crust">Crust</label>
-        <label><input type="radio" name="discriminator" value="size">Size</label>
+    <br>
+    <br>
+    <b for="toppings">Pizza Toppings:</b>
+    <fieldset name="Checkbox">
+        <ul style="list-style-type:none">
+            @foreach (var topping in ViewBag.Toppings)
+            {
+                <li><label><input type="checkbox" name="toppings" value="@topping" required> @topping</label></li>
+            }
+        </ul>
     </fieldset>
+    
+    <br>
+    <b for="sizes">Pizza Sizes:</b>
+    <fieldset name="Radiobutton">
+        <ul style="list-style-type:none">
+            @foreach (var size in ViewBag.Sizes)
+            {
+                <li><label><input type="radio" name="sizes" value="@size" required> @size</label></li>
+            }
+        </ul>
+    </fieldset>
+    <br>
+    <b for="sizes">Pizza Crusts:</b>
+    <fieldset name="Radiobutton">
+        <ul style="list-style-type:none">
+            @foreach (var crust in ViewBag.Crusts)
+            {
+                <li><label><input type="radio" name="crusts" value="@crust" required> @crust</label></li>
+            }
+        </ul>
+    </fieldset>
+    <br>
 
     <button type="submit">Place Order</button>
     @Html.AntiForgeryToken()
