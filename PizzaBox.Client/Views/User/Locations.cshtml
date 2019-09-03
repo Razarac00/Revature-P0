@@ -19,7 +19,8 @@
             @address.City
         </td>
         <td>
-            <input type="button" value="Place an Order" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" />
+            <button name="addressid" type="submit" value="@address.AddressId" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" >Place an Order</button>
+            <!-- <input type="button" value="Place an Order" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" /> -->
         </td>
     </tr>
     <br>

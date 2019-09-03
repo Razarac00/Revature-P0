@@ -1,20 +1,24 @@
 @model PizzaBox.Domain.Models.AddressedOrder
 
 @{
-    var addressId = TempData["AddressId"];
-    var userId = TempData["UserId"];
+    var addressId = TempData["AddressID"];
+    var userId = TempData["UserID"];
+    var username = TempData["UserName"];
 }
 
 <div class="text-right">
-    <small>Logged in as: @userId</small>
+    <small>Logged in as: @username</small>
 </div>
 
 <form action="/order/createorder" method="post">
 
-    <input type="button" value="Build Your Pizza" onclick="@("window.location.href='" + @Url.Action("create", "pizza") + "'");" />
+    <!-- <input type="button" value="Build Your Pizza" onclick="@("window.location.href='" + @Url.Action("create", "pizza") + "'");" /> -->
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Retype Username">
 
-    <!-- <label for="price">Price</label>
-    <input type="number" min="0.01" step="any" id="price" name="price" placeholder="Item Price"> -->
+    <label for="addressline1">Address</label>
+    <input type="text" id="addressline1" name="addressline1" placeholder="Retype Username">
+
 
     <fieldset name="Radiobutton">
         <label><input type="radio" name="discriminator" value="topping" required>Topping</label>

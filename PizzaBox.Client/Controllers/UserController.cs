@@ -84,13 +84,20 @@ namespace PizzaBox.Client.Controllers
         public IActionResult Locations()
         {
             var storeAddresses = _db.Addresses.ToList();
+            var userId = (int) TempData["UserID"];
+            TempData["UserID"] = userId;
+            TempData.Keep();
             return View(storeAddresses);
         }
 
         [HttpGet]
-        public IActionResult MakeOrder()
+        public IActionResult MakeOrder(int addressId)
         {
-            // var u = TempData["UserID"];
+            var userId = (int) TempData["UserID"];
+            var user = _db.Users.Single(u => u.UserId == userId);
+            TempData["UserID"] = userId;
+            TempData["AddressID"] = addressId;
+            TempData.Keep();
             return RedirectToAction("createorder", "order");
         }
         public IActionResult MakeOrder(Address address)
