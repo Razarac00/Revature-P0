@@ -3,8 +3,15 @@
 @foreach (var address in @Model)
 {
     <tr>
-        <td>@address.AddressLine</td>
-        <td>@address.City</td>
-        <td>@Html.ActionLink("Order", "CreateOrder", "Order", new { AddressId=address.AddressId})</td>
+        <td>
+            @address.AddressLine
+        </td>
+        <td>
+            @address.City
+        </td>
+        <td>
+            @Html.ActionLink("Order", "CreateOrder", "Order", new { AddressId=address.AddressId})
+        </td>
     </tr>
+    <br>
 }
