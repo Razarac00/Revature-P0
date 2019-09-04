@@ -36,8 +36,8 @@ namespace PizzaBox.Client.Controllers
             }
             catch (System.Exception)
             {
-                
-                return RedirectToAction("Error");
+                return RedirectToAction("Login");
+                // return RedirectToAction("Error");
             }
 
         }
@@ -50,12 +50,13 @@ namespace PizzaBox.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateUser(User user, Name name)
+        public IActionResult CreateUser(User user)
         {
+            
             if (ModelState.IsValid)
             {
                 var finalUser = user;
-                finalUser.Name = name;
+                // finalUser.Name = name;
 
                 _db.Users.Add(finalUser);
                 _db.SaveChangesAsync();

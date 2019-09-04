@@ -13,9 +13,7 @@ namespace PizzaBox.Domain.Models
         private Name _name = new Name();
         private int _defaultTimeLimit = 2;
         private int _defaultStoreTImeLimit = 24;
-        private AddressedOrder _latestOrder = new AddressedOrder();
         private static string _recipeNameSpace = "PizzaBox.Domain.Recipes";
-
 
         public int UserId { get; set; }
         public Name Name { get => _name; set => _name = value; }
@@ -27,7 +25,6 @@ namespace PizzaBox.Domain.Models
         // [DataType(DataType.Password)]
         public string Password { get; set; }
         public List<AddressedOrder> UserOrderHistory { get; set; }
-        public AddressedOrder LatestOrder { get => _latestOrder; set => _latestOrder = value; }
         private AddressedOrder CurrentOrder { get; set; }
         public Pizza CustomPizza { get; set; }
 
@@ -78,6 +75,7 @@ namespace PizzaBox.Domain.Models
         {
             CurrentOrder.Date = DateTime.Now;
             CurrentOrder.FinalPrice = CurrentOrder.Order.ComputeTotalPrice();
+            var LatestOrder = getLatestOrder();
 
             if (LatestOrder is null ||  (CheckTimeLimitReached() && !CheckDailyStoreLimitReached()))
             {
@@ -90,6 +88,7 @@ namespace PizzaBox.Domain.Models
         private bool CheckTimeLimitReached()
         {
             var result = true;
+            var LatestOrder = getLatestOrder();
             if (LatestOrder != null)
             {
                 var tempDate = LatestOrder.Date;
@@ -104,6 +103,7 @@ namespace PizzaBox.Domain.Models
         private bool CheckDailyStoreLimitReached()
         {
             var result = false;
+            var LatestOrder = getLatestOrder();
             if (LatestOrder != null)
             {
                 if (LatestOrder.Address != CurrentOrder.Address)
@@ -115,6 +115,11 @@ namespace PizzaBox.Domain.Models
                 }
             }
             return result;
+        }
+
+        public AddressedOrder getLatestOrder()
+        {
+            return UserOrderHistory.OrderByDescending(o => o.Date).FirstOrDefault();
         }
 
         public void PrintOrderHistory()
