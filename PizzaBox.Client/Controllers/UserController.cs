@@ -115,11 +115,11 @@ namespace PizzaBox.Client.Controllers
             TempData.Keep();
             return RedirectToAction("createorder", "order");
         }
-        public IActionResult MakeOrder(Address address)
+        public IActionResult LatestOrder()
         {
             var loadedUser = _db.Users.Single(u => u.UserId == (int) TempData["UserID"]);
-            var chosenAddress = _db.Addresses.Single(a => a.AddressId == address.AddressId);
-            loadedUser.StartOrder(chosenAddress);
+            ViewBag.LatestOrder = loadedUser.getLatestOrder();
+            ViewBag.UserName = loadedUser.UserName;
             return View();
         }
 

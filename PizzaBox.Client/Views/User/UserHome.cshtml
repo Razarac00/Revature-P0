@@ -1,4 +1,19 @@
 @model PizzaBox.Domain.Models.User
+
+@{
+    var confirmed = (string) TempData["Confirmed"];
+}
+
+@if (confirmed != null && confirmed != "")
+{
+<div id="orderConfirmed" class="alert alert-info alert-dismissible fade show" role="alert">
+    @confirmed <a asp-area="" asp-controller="User" asp-action="LatestOrder">View It!</a>
+    <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">Accept</span>
+    </button>
+</div>
+}
+
 <div class="text-right">
     <small>Logged in as: @Model.UserName</small>
 </div>

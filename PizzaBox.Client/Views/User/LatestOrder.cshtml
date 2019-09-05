@@ -1,0 +1,8 @@
+<div class="text-right">
+    <small>Logged in as: @ViewBag.UserName</small>
+</div>
+
+@ViewBag.LatestOrder
+
+<input type="button" value="Sign Out" onclick="@("window.location.href='" + @Url.Action("logout", "user") + "'");" />
+<input type="button" value="Back" onclick="@("window.location.href='" + @Url.Action("userhome", "user") + "'");" />

@@ -19,7 +19,7 @@
             @address.City
         </td>
         <td>
-            <button name="addressid" type="submit" value="@address.AddressId" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" >Place an Order</button>
+            <button asp-for="@address.AddressId" type="submit" value="@address.AddressId" onclick="@("window.location.href='" + @Url.Action("makeorder", "user") + "'");" >Place an Order</button>
         </td>
     </tr>
     <br>
