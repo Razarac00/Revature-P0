@@ -38,6 +38,7 @@ namespace PizzaBox.Data
 
             builder.Entity<Address>().Property(a => a.AddressLine).IsRequired();
             builder.Entity<Address>().Property(a => a.City).IsRequired();
+            builder.Entity<Address>().HasOne(a => a.Store).WithOne(s => s.Address);
 
             builder.Entity<AItem>().HasIndex(i => i.Name).IsUnique();
 
@@ -56,7 +57,7 @@ namespace PizzaBox.Data
             builder.Entity<Pizza>().HasOne(p => p.Crust);
             builder.Entity<Pizza>().HasOne(p => p.Size);
 
-            builder.Entity<Store>().HasOne(s => s.Address);
+            // builder.Entity<Store>().HasOne(s => s.Address);
         }
     }    
 }

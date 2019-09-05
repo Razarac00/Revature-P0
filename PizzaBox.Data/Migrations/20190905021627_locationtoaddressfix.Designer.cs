@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Data;
 
 namespace PizzaBox.Data.Migrations
 {
     [DbContext(typeof(ProjectZeroTwoDBContext))]
-    partial class ProjectZeroTwoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190905021627_locationtoaddressfix")]
+    partial class locationtoaddressfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
