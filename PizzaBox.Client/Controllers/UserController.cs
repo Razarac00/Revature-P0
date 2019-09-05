@@ -32,6 +32,10 @@ namespace PizzaBox.Client.Controllers
                 {
                     TempData["Issue"] = "Your username or password was incorrect, please try again.";
                     return RedirectToAction("Login");
+                } 
+                else if (user.UserName == "Admin")
+                {
+                    return RedirectToAction("Main", "Store");
                 }
                 return RedirectToAction("UserHome",user);
             }

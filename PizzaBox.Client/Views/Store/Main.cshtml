@@ -1,0 +1,9 @@
+
+<div class="text-left">
+    <h1 class="display-4">Welcome Admin</h1>
+</div>
+<br>
+<div class="text-left">
+    <input type="button" value="Create Inventory Items" onclick="@("window.location.href='" + @Url.Action("create", "aitem") + "'");" />
+    <input type="button" value="View Stores" onclick="@("window.location.href='" + @Url.Action("read", "store") + "'");" />
+</div>

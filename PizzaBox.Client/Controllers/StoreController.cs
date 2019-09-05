@@ -15,6 +15,12 @@ namespace PizzaBox.Client.Controllers
     {
         private ProjectZeroTwoDBContext _db = new ProjectZeroTwoDBContext();
 
+        [HttpGet]
+        public IActionResult Main()
+        {
+            return View();
+        }
+
         [HttpGet("{StoreId}")]
         public IActionResult ViewOrders(int StoreId)
         {
