@@ -12,7 +12,7 @@ namespace PizzaBox.Domain.Models
         private Address _location = new Address();
         private List<AddressedOrder> _storeOrderHistory = new List<AddressedOrder>();
         private Inventory _inventory = new Inventory();
-        public Address Location { get => _location; set => _location = value; }
+        public Address Address { get => _location; set => _location = value; }
         public Inventory Inventory { get => _inventory; set => _inventory = value; }
         public List<AddressedOrder> StoreOrderHistory { get => _storeOrderHistory; set => _storeOrderHistory = value; }
 
@@ -62,7 +62,7 @@ namespace PizzaBox.Domain.Models
 
         public override string ToString()
         {
-            return $"{this.GetType().Name} Address: {Location.AddressLine} City: {Location.City}";
+            return $"{this.GetType().Name} Address: {Address.AddressLine} City: {Address.City}";
         }
 
 

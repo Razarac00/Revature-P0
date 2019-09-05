@@ -22,7 +22,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var store = new Store();
         var address1 = new Address("test1", "city1");
-        store.Location = address1;
+        store.Address = address1;
         var order1 = new Order();
         var addressedOrder = new AddressedOrder(address1, order1);
         store.StoreOrderHistory.Add(addressedOrder);
@@ -41,7 +41,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var store = new Store();
         var address1 = new Address("test1", "city1");
-        store.Location = address1;
+        store.Address = address1;
         var order1 = new Order();
         var pizza1 = new Standard().Make() as Pizza;
         var pizza2 = new NewYork().Make() as Pizza;
@@ -76,7 +76,7 @@ namespace PizzaBox.Testing.UnitTests
         //Given
         var store = new Store();
         var address1 = new Address("test1", "city1");
-        store.Location = address1;
+        store.Address = address1;
         var order1 = new Order();
         var addressedOrder = new AddressedOrder(address1, order1);
         var orderUser = new User();

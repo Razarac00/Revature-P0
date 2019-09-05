@@ -56,7 +56,7 @@ namespace PizzaBox.Data
             builder.Entity<Pizza>().HasOne(p => p.Crust);
             builder.Entity<Pizza>().HasOne(p => p.Size);
 
-            builder.Entity<Store>().HasOne(s => s.Location);
+            builder.Entity<Store>().HasOne(s => s.Address);
         }
     }    
 }
