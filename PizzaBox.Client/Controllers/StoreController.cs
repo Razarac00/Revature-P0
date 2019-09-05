@@ -32,7 +32,7 @@ namespace PizzaBox.Client.Controllers
         [HttpGet]
         public ViewResult Read()
         {
-            var stores = _db.Stores.Include(s => s.Location).ToList();
+            var stores = _db.Stores.Include(s => s.Address).ToList();
             return View(stores);
         }
 

@@ -2,13 +2,13 @@
 
 <form action="/store/create" method="post">
 
-    @Html.ValidationMessageFor(m => m.Location.AddressLine)
+    @Html.ValidationMessageFor(m => m.Address.AddressLine)
     <label for="addressLine1">Address Line 1</label>
-    <input type="text" id="addressLine1" asp-for="@Model.Location.AddressLine" placeholder="## Street">
+    <input type="text" id="addressLine1" asp-for="@Model.Address.AddressLine" placeholder="## Street">
 
-    @Html.ValidationMessageFor(m => m.Location.City)
+    @Html.ValidationMessageFor(m => m.Address.City)
     <label for="city">City</label>
-    <input type="text" id="city" asp-for="@Model.Location.City" placeholder="TX">
+    <input type="text" id="city" asp-for="@Model.Address.City" placeholder="TX">
 
     <button type="submit">Submit</button>
     @Html.AntiForgeryToken()
