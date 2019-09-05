@@ -27,17 +27,17 @@ namespace PizzaBox.Client.Controllers
         {
             try
             {
-                var user = _db.Users.Single(u => u.UserName == username && u.Password == password);
+                var user = _db.Users.SingleOrDefault(u => u.UserName == username && u.Password == password);
                 if (user == null)
                 {
+                    TempData["Issue"] = "Your username or password was incorrect, please try again.";
                     return RedirectToAction("Login");
                 }
                 return RedirectToAction("UserHome",user);
             }
             catch (System.Exception)
             {
-                return RedirectToAction("Login");
-                // return RedirectToAction("Error");
+                return RedirectToAction("Error");
             }
 
         }
@@ -55,20 +55,30 @@ namespace PizzaBox.Client.Controllers
             
             if (ModelState.IsValid)
             {
-                var finalUser = user;
-                // finalUser.Name = name;
+                if (_db.Users.SingleOrDefault(u => u.UserName == user.UserName) == null)
+                {
+                    var finalUser = user;
 
-                _db.Users.Add(finalUser);
-                _db.SaveChangesAsync();
+                    _db.Users.Add(finalUser);
+                    _db.SaveChangesAsync();
 
-                return RedirectToAction("Login");
+                    return RedirectToAction("Login");
+                }
+
+                TempData["Issue"] = "Username already exists, please try again.";
+                return View();
             }
             return View();
         }
 
         public IActionResult UserHome(User user)
         {
-            var loadedUser = _db.Users.Include("Name").Single(u => u.UserId == user.UserId);
+            var loadedUser = _db.Users.Include("Name").SingleOrDefault(u => u.UserId == user.UserId);
+            if (loadedUser == null)
+            {
+                TempData["Issue"] = "There was trouble getting to your account. Please try again.";
+                return RedirectToAction("Login");
+            }
             TempData["UserID"] = loadedUser.UserId;
             TempData["UserName"] = loadedUser.UserName;
             TempData.Keep();

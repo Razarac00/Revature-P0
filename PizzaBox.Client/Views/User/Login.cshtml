@@ -1,5 +1,10 @@
 @model PizzaBox.Domain.Models.User
 
+@{
+    var issue = (string) TempData["issue"];
+}
+
+@Html.ValidationSummary(@issue)
 <div class="text-left">
     <h1 class="display-4">Log In for PIZZA</h1>
 </div>

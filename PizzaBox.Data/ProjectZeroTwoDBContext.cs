@@ -8,8 +8,6 @@ namespace PizzaBox.Data
     public class ProjectZeroTwoDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        // public DbSet<OrderHistory> StoreOrderHistories { get; set; }
-        // public DbSet<OrderHistory> UserOrderHistories { get; set; }
         public DbSet<AddressedOrder> AddressedOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -38,9 +36,6 @@ namespace PizzaBox.Data
                    .HasOne(a => a.OrderHistory)
                    .WithMany(o => o.Orders);
 
-            // builder.Entity<Address>()
-            //        .HasOne(a => a.Store)
-            //        .WithOne(s => s.Location);
             builder.Entity<Address>().Property(a => a.AddressLine).IsRequired();
             builder.Entity<Address>().Property(a => a.City).IsRequired();
 
@@ -52,14 +47,6 @@ namespace PizzaBox.Data
             builder.Entity<Inventory>()
                    .HasOne(i => i.Store)
                    .WithOne(s => s.Inventory);
-
-            // builder.Entity<OrderHistory>()
-            //        .HasOne(o => o.User)
-            //        .WithOne(u => u.UserOrderHistory);
-
-            // builder.Entity<OrderHistory>()
-            //        .HasOne(o => o.Store)
-            //        .WithOne(s => s.StoreOrderHistory);
 
             builder.Entity<Order>()
                    .HasOne(o => o.AddressedOrder)
